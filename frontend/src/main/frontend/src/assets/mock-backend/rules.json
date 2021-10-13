@@ -1,0 +1,579 @@
+{
+  "rules": 
+    [
+        {
+            "rule_id": "pgw_userFilterCriterias_existence",
+            "rule_name": "PGW API userFilterCriteriasshould exist for subscriber",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "hss.serviceProfiles.userFilterCriterias": []
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "PGW API userFilterCriteriasdid not exist for subscriber.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:04:26.635Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-19T17:03:33.442Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hss",
+            "subscription_data_keys": [
+                "hss.serviceProfiles.userFilterCriterias"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "hss.serviceProfiles.userFilterCriterias": ""
+            },
+            "criteria": {
+                "hss.serviceProfiles.userFilterCriterias": {}
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ],
+            "default_response": "PASS"
+        },
+        {
+            "rule_id": "messaging_digits_validation",
+            "rule_name": "Messaging's isDigits field must be true",
+            "data_type": "String",
+            "method": "equals",
+            "values": {
+                "messaging.isDigits": [
+                    "true"
+                ]
+            },
+            "features": [
+                "DIGITS",
+                "UCC"
+            ],
+            "result_text": "isDigits field in Messaging was not true.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:04:49.782Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-14T20:21:12.222Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "messaging-api",
+            "subscription_data_keys": [
+                "messaging.isDigits"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "messaging.isDigits": ""
+            },
+            "criteria": {
+                "messaging.isDigits": {}
+            },
+            "system": "SPS",
+            "event_types": [
+                "CREATE"
+            ],
+            "default_response": "PASS"
+        },
+        {
+            "rule_id": "bhc_msisdn_validation",
+            "rule_name": "businessHubConnect MSISDN must match with the NAP event msisdn",
+            "data_type": "String",
+            "method": "equals",
+            "values": {
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.msisdn": []
+            },
+            "features": [
+                "UCC"
+            ],
+            "result_text": "BHC API MSISDN did not match with that in event.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:05:05.741Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-14T20:18:35.665Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "bhc-api",
+            "subscription_data_keys": [
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.msisdn"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.msisdn": "MSISDN"
+            },
+            "criteria": {
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.msisdn": {}
+            },
+            "system": "WSG",
+            "event_types": [
+                "CREATE"
+            ],
+            "default_response": "PASS"
+        },
+        {
+            "rule_id": "messaging_smsc_mmsc_rcs_existence",
+            "rule_name": "Messaging smsc mmsc rcs should exist for subscriber",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "mmsc": [],
+                "rcs": [],
+                "smsc": []
+            },
+            "features": [
+                "DIGITS",
+                "UCC",
+                "INSTANT"
+            ],
+            "result_text": "Messaging section did not exist for subscriber",
+            "active": true,
+            "create_dttm": "2021-04-14T19:05:22.325Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T22:01:16.675Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "messaging-api",
+            "subscription_data_keys": [
+                "smsc",
+                "mmsc",
+                "rcs"
+            ],
+            "validate_external_data": false,
+            "system": "SPS",
+            "event_types": [
+                "CREATE",
+                "INSTANT_VALIDATION"
+            ]
+        },
+        {
+            "rule_id": "digits_msisdn_validation",
+            "rule_name": "Digits MSISDN must match with the NAP event msisdn",
+            "data_type": "String",
+            "method": "equals",
+            "values": {
+                "cdb.userProfile.document.user-profiles.lineInfo.msisdn": []
+            },
+            "features": [
+                "DIGITS"
+            ],
+            "result_text": "Digits API MSISDN did not match with that in event.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:05:31.619Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:53:44.082Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "digits-api,cdb/userProfile",
+            "subscription_data_keys": [
+                "cdb.userProfile.document.user-profiles.lineInfo.msisdn"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "cdb.userProfile.document.user-profiles.lineInfo.msisdn": "MSISDN"
+            },
+            "system": "WSG",
+            "event_types": [
+                "CREATE"
+            ]
+        },
+        {
+            "rule_id": "pgw_msisdn_validation",
+            "rule_name": "PGW HLR basicServices msisdns should match the event msisdn",
+            "data_type": "String",
+            "method": "allEquals",
+            "values": {
+                "hlr.basicServices.msisdn": []
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "MSISDN in PGW HLR basicServices did not match the event msisdn",
+            "active": true,
+            "create_dttm": "2021-04-14T19:05:42.560Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:54:03.514Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hlr",
+            "subscription_data_keys": [
+                "hlr.basicServices.msisdn"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "hlr.basicServices.msisdn": "MSISDN"
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ]
+        },
+        {
+            "rule_id": "validate_globalFilters_ucc",
+            "rule_name": "PGW HSS globalFilterIds should contain certain Filter Ids.",
+            "data_type": "String",
+            "method": "contains",
+            "values": {
+                "hss.serviceProfiles.globalFilterIds": [
+                    "MsgingOriginate",
+                    "MsgingTerminate",
+                    "UCCPSOrgSub",
+                    "UCCPSPublish",
+                    "UCCPSRegister",
+                    "UCCPSTermSub",
+                    "UCCRLSOrgSub",
+                    "UCCRLSRegister",
+                    "UCCRcsMsgOrigInvU",
+                    "UCCRcsMsgTermInvR",
+                    "UCCRcsMsgTermInvU",
+                    "UCCRcsOrigMsgU",
+                    "UCCRcsRegister",
+                    "UCCRcsSubsR",
+                    "UCCRcsTermMsgR",
+                    "UCCRcsTermMsgU",
+                    "UCCRcsMsgOrigInvR",
+                    "UCCRcsOrigMsgR",
+                    "UCCVoiceVideoDiaSub",
+                    "UCCVoiceVideoOrgInv",
+                    "UCCVoiceVideoRefer",
+                    "UCCVoiceVideoTerInvT",
+                    "UCCVoiceVideoTerInvU",
+                    "UCCXDMSSub",
+                    "POLOrigMsgRPAck1",
+                    "POLOrigMsgRPAck2",
+                    "POLOrigMsgRPAck3",
+                    "POLOrigMsgRPAck4",
+                    "POLOrigMsgRPAck5",
+                    "POLOrigMsgRPAck6",
+                    "POLOrigMsgRPAck7",
+                    "POLOrigMsgRPAck8",
+                    "POLOrigMsgRPAck9",
+                    "TTNOrigMsgRPAck1",
+                    "TTNOrigMsgRPAck2",
+                    "TTNOrigMsgRPAck3",
+                    "TTNOrigMsgRPAck4",
+                    "TTNOrigMsgRPAck5",
+                    "TTNOrigMsgRPAck6",
+                    "TTNOrigMsgRPAck7",
+                    "TTNOrigMsgRPAck8",
+                    "TTNOrigMsgRPAck9",
+                    "RCSMsgChatOrigInv"
+                ]
+            },
+            "features": [
+                "UCCGSM",
+                "ConferenceLine",
+                "AutoLine"
+            ],
+            "result_text": "The following filter Id was missing from pgw.hss.serviceProfile.globalFilterIds",
+            "active": true,
+            "create_dttm": "2021-04-14T19:06:06.202Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:55:07.629Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hss",
+            "subscription_data_keys": [
+                "hss.serviceProfiles.globalFilterIds"
+            ],
+            "validate_external_data": false,
+            "system": "USD",
+            "event_types": [
+                "CREATE"
+            ]
+        },
+        {
+            "rule_id": "mstore_cos_validation",
+            "rule_name": "Voicemail CoS code must match the event mStore CoS code",
+            "data_type": "String",
+            "method": "equals",
+            "values": {
+                "common.classOfServiceId": []
+            },
+            "features": [
+                "DIGITS",
+                "UCC"
+            ],
+            "result_text": "Voicemail CoS code did not match with that in event.",
+            "active": false,
+            "create_dttm": "2021-04-14T19:06:26.238Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T22:00:05.629Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "voicemail-api",
+            "subscription_data_keys": [
+                "common.classOfServiceId"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "common.classOfServiceId": "MSTORECOS"
+            },
+            "system": "mstore",
+            "event_types": [
+                "CREATE"
+            ]
+        },
+        {
+            "rule_id": "messaging_msisdn_validation",
+            "rule_name": "Messaging MSISDN must match with the NAP event msisdn",
+            "data_type": "String",
+            "method": "equals",
+            "values": {
+                "messaging.msisdn": []
+            },
+            "features": [
+                "DIGITS",
+                "UCC"
+            ],
+            "result_text": "Messaging API MSISDN did not match with that in event.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:06:38.536Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:55:13.979Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "messaging-api",
+            "subscription_data_keys": [
+                "messaging.msisdn"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "messaging.msisdn": "MSISDN"
+            },
+            "system": "SPS",
+            "event_types": [
+                "CREATE"
+            ]
+        },
+        {
+            "rule_id": "pgw_gprsApn_existence",
+            "rule_name": "PGW API gprsApnLists should exist for serviceCode gprs",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "hlr.basicServices.gprsApnLists": []
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "PGW API gprsApnLists did not exist for serviceCode gprs.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:06:48.945Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T22:00:56.883Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hlr",
+            "subscription_data_keys": [
+                "hlr.basicServices.gprsApnLists"
+            ],
+            "validate_external_data": false,
+            "criteria": {
+                "hlr.basicServices.gprsApnLists": {
+                    "serviceCode": "gprs"
+                }
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ]
+        },
+        {
+            "rule_id": "pgw_serviceCode_validate",
+            "rule_name": "PGW API serviceCodes should include certain codes",
+            "data_type": "String",
+            "method": "contains",
+            "values": {
+                "hlr.basicServices.serviceCode": [
+                    "ts11",
+                    "ts21",
+                    "ts22",
+                    "ts21Gprs",
+                    "ts22Gprs"
+                ]
+            },
+            "features": [
+                "DIGITS, UCC",
+                "INSTANT"
+            ],
+            "result_text": "The following service code was missing from hlr.basicServices",
+            "active": true,
+            "create_dttm": "2021-04-14T19:07:01.141Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:55:57.495Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hlr",
+            "subscription_data_keys": [
+                "hlr.basicServices.serviceCode"
+            ],
+            "validate_external_data": false,
+            "system": "USD",
+            "event_types": [
+                "CREATE",
+                "INSTANT_VALIDATION"
+            ]
+        },
+        {
+            "rule_id": "pgw_lteApn_existence",
+            "rule_name": "PGW API LTEAPN should exist for subscriber",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "hlr.epsLte.lteApnLists": []
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "PGW API LTEAPN did not exist for subscriber.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:07:13.421Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:56:11.074Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hlr",
+            "subscription_data_keys": [
+                "hlr.epsLte.lteApnLists"
+            ],
+            "validate_external_data": false,
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ]
+        },
+        {
+            "rule_id": "bhc_userProfile_exists",
+            "rule_name": "BHC userProfile should exist",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "businessHubConnect.userProfile.document": []
+            },
+            "features": [
+                "UCC"
+            ],
+            "result_text": "BHC userProfile did not exist.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:07:24.113Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-14T21:15:31.765Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "bhc-api",
+            "subscription_data_keys": [
+                "businessHubConnect.userProfile.document"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "businessHubConnect.userProfile.document": ""
+            },
+            "criteria": {
+                "businessHubConnect.userProfile.document": {
+                    "asdf": "asdf"
+                }
+            },
+            "system": "WSG",
+            "event_types": [
+                "CREATE"
+            ],
+            "default_response": "FAIL"
+        },
+        {
+            "rule_id": "bhc_linetype_verification",
+            "rule_name": "BHC linetype must match the NAP event linetype",
+            "data_type": "String",
+            "method": "includes",
+            "values": {
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.lineType": []
+            },
+            "features": [
+                "UCC"
+            ],
+            "result_text": "BHC linetype did not match the NAP event linetype.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:07:33.936Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-04-06T21:58:17.911Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "bhc-api",
+            "subscription_data_keys": [
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.lineType"
+            ],
+            "validate_external_data": true,
+            "external_data_key": {
+                "businessHubConnect.userProfile.document.user-profiles.lineInfo.lineType": "LINETYPE"
+            },
+            "system": "WSG",
+            "event_types": [
+                "CREATE"
+            ]
+        },
+        {
+            "rule_id": "asdf",
+            "rule_name": "asdf",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "asdf": []
+            },
+            "features": [
+                "asdf"
+            ],
+            "result_text": "asdf",
+            "active": true,
+            "create_dttm": "2021-07-20T22:15:56.470Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-20T22:16:20.922Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "Zoey PGW API,gmlc",
+            "subscription_data_keys": [
+                "asdf"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "asdf": ""
+            },
+            "criteria": {
+                "asdf": {}
+            },
+            "system": "asdf",
+            "event_types": [
+                "CREATE"
+            ],
+            "default_response": "FAIL"
+        },
+        {
+            "rule_id": "validate_user_filter_criteria_ucc",
+            "rule_name": "PGW HSS userFilterCriteria should contain certain constant values for userFilterCriteria for UCC as feature.",
+            "data_type": "String",
+            "method": "contains",
+            "values": {
+                "asdf": [
+                    "asdf"
+                ],
+                "hss.serviceProfiles.userFilterCriterias.filterName": [
+                    "sdf",
+                    "asdf",
+                    "d"
+                ]
+            },
+            "features": [
+                "UCC"
+            ],
+            "result_text": "The following userFilterCriteria was missing from pgw.hss.serviceProfile.userFilterCriteria",
+            "active": true,
+            "create_dttm": "2021-04-14T19:09:33.548Z",
+            "create_user": "ZOEY_ADMIN",
+            "mod_dttm": "2021-07-14T21:12:30.953Z",
+            "mod_user": "ZOEY_ADMIN",
+            "data_source": "pgw-api,hss",
+            "subscription_data_keys": [
+                "hss.serviceProfiles.userFilterCriterias.filterName",
+                "asdf"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "asdf": "",
+                "hss.serviceProfiles.userFilterCriterias.filterName": ""
+            },
+            "criteria": {
+                "asdf": {},
+                "hss.serviceProfiles.userFilterCriterias.filterName": {
+                    "asdf": "asdf"
+                }
+            },
+            "system": "USD",
+            "event_types": [
+                "CREATE"
+            ],
+            "default_response": "PASS"
+        }
+    ]
+}

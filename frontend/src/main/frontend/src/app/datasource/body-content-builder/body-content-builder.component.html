@@ -1,0 +1,28 @@
+<section class="custom-json-viewer">
+  <section *ngFor="let segment of bodyContent.controls | keyvalue; let i=index" [ngClass]="['segment', !intent ? 'segment-type-dark-' + getSegmentType(segment.value) : 'segment-type-' + getSegmentType(segment.value)]">
+    <section class="segment-main" [ngClass]="{'hide': isArrayObject(bodyContent)}">
+      
+      <div class="title">
+        <span [ngClass]="[!intent ? 'segment-key-dark' : 'segment-key']">{{ segment.key }}</span>
+        <span class="segment-separator" *ngIf="segment.key!=='ROOT'">: </span>
+        <span class="segment-value" *ngIf="segment.key!=='ROOT'">{{ getSegmentDescription(segment.value) }}</span>
+      </div>
+
+      <div class="actions">
+        <div class="action">
+          <nb-icon *ngIf="(intent==='Add-Datasource' || intent==='Edit-Endpoint' || intent==='Add-Endpoint') && isObject(segment.value)" icon="plus-square" status="basic" (click)="onAddSegment(segment.key, segment.value)"></nb-icon>
+          <nb-icon *ngIf="intent==='Populate-Values' && !isObject(segment.value)" icon="edit" status="basic" (click)="onPopulateSegment(segment.key, segment.value)"></nb-icon>
+        </div>
+        <div class="action">
+          <nb-icon *ngIf="(intent==='Add-Datasource' || intent==='Edit-Endpoint' || intent==='Add-Endpoint') && segment.key !== 'ROOT'" icon="minus-square" status="danger" (click)="onDeleteSegment(segment.key, segment.value)"></nb-icon>
+          <!-- <nb-icon *ngIf="populateOnly && segment['control'] && segment['control'].valid" icon="checkmark-outline" status="success" id="checkmark"></nb-icon> -->
+        </div>
+      </div>
+
+    </section>
+
+    <section *ngIf="isObject(segment.value)" class="children">
+      <body-content-builder [bodyContent]="segment.value" [intent]="intent"></body-content-builder>
+    </section>
+  </section>
+</section>

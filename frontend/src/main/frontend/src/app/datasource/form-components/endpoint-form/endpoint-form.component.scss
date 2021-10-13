@@ -1,0 +1,103 @@
+@import 'src/styles/vars.scss';
+
+.container {
+    margin-bottom: 1rem;
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: .5rem 0;
+    border-bottom: 2px solid #e4e9f2;
+    
+    span {
+        color: $tmo-pink;
+    }
+}
+
+.section > .title {
+    margin-top: 1rem;
+}
+
+nb-accordion {
+    nb-accordion-item {
+        margin-bottom: 0;
+    }
+
+    nb-accordion-item-header {
+        min-width: 1250px;
+        background-color: $tmo-gray;
+        position: relative;
+        color: $tmo-white;
+
+        nb-icon {
+            position: absolute;
+            right: 3rem;
+        }
+    }
+
+    nb-accordion-item-body {
+        padding: .5rem;
+    }
+}
+
+.row, .header-field {
+    margin-top: .3rem;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 1.5rem;
+
+    align-items: center;
+    position: relative;
+}
+
+.field > input, .field > nb-select, .field > nb-form-field {
+    margin-top: .3rem;
+}
+
+#parameters {
+    .row, .header-field {
+        grid-template-columns: .7fr .7fr .7fr .7fr 1fr .7fr;
+    }
+
+    form > .delete-btn {
+        position: absolute;
+        right: 0;
+        cursor: pointer;
+    }
+}
+
+#body {
+    form {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        column-gap: 1.5rem;
+        margin-top: .5rem;
+    }
+
+    .row {
+        grid-template-columns: 1fr 1fr;
+        align-items: flex-start;
+    }
+
+    .body-content {
+        border: 1px solid #e4e9f2;
+        padding: 1rem;
+        margin-top: .5rem;
+    }
+
+    .json-view {
+        padding: 1rem;
+        background-color: $tmo-gray;
+        margin-top: .5rem;
+    
+        pre {
+            color: #fff;
+            font-size: .7em;
+        }
+    }
+}

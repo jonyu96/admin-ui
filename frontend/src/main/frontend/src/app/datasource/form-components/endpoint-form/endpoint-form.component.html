@@ -1,0 +1,140 @@
+<div class="container">
+    <div class="title">
+        <span class="caption-2 text-basic">Endpoint Data</span> 
+        <div class="btn" (click)="onAddEndpointData()" *ngIf="intent==='Add-Datasource'">
+            <nb-icon icon="plus-square"></nb-icon>
+        </div>
+    </div>
+    
+    <nb-accordion *ngIf="endpointData">
+        <nb-accordion-item #accordionItem *ngFor="let endpointDataGroup of endpointData.controls; let i=index" [expanded]="intent==='Edit-Endpoint' || intent==='Add-Endpoint' ? 'true' : 'false'">
+            <nb-accordion-item-header>
+                <span class="caption-2 text-alternate">Endpoint: 
+                    <span class="caption text-alternate" style="margin-left: .2rem;">{{ endpointDataGroup.get('endpoint').value ? '/' + endpointDataGroup.get('endpoint').value : '--' }}</span></span>
+                <nb-icon *ngIf="i !== 0 && intent !== 'Populate-Values'" icon="minus-square" status="danger" (click)="onDeleteEndpointData(i)"></nb-icon>
+            </nb-accordion-item-header>
+            <nb-accordion-item-body>
+                <form [formGroup]="endpointDataGroup" class="row">
+                    <div class="field">
+                        <span class="caption-1">Operation ID</span>
+                        <input #operationId nbInput fullWidth type="text" fieldSize="tiny" placeholder="Operation ID" formControlName="operationId"
+                            [status]="endpointDataGroup.get('operationId').invalid && submitted ? 'warning' : 'basic'">
+                    </div>
+                    <div class="field">
+                        <span class="caption-1">Endpoint</span>
+                        <nb-form-field>
+                            <span nbPrefix>/</span>
+                            <input nbInput fullWidth type="text" fieldSize="tiny" placeholder="Endpoint" formControlName="endpoint" 
+                                [status]="endpointDataGroup.get('endpoint').invalid && submitted ? 'warning' : 'basic'">
+                        </nb-form-field>
+                    </div>
+                    <div class="field">
+                        <span class="caption-1">HTTP Method</span>
+                        <nb-select fullWidth placeholder="HTTP Method" size="tiny" formControlName="httpMethod" 
+                            [status]="endpointDataGroup.get('httpMethod').invalid && submitted ? 'warning' : 'basic'">
+                            <nb-option value="GET">GET</nb-option>
+                            <nb-option value="POST">POST</nb-option>
+                            <nb-option value="PUT">PUT</nb-option>
+                            <nb-option value="DELETE">DELETE</nb-option>
+                        </nb-select>
+                    </div>
+                </form>
+
+                <!-- Parameters -->
+                <div class="section" id="parameters">
+                    <div class="title">
+                        <span class="caption-2">Parameters</span>
+                        <div class="btn" (click)="onAddParameter(endpointDataGroup)">
+                            <nb-icon icon="plus-square-outline" status="hint"></nb-icon>
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="header-field">
+                            <span *ngFor="let paramField of PARAMETER_FIELDS" class="caption-1">{{ paramField }}</span>
+                        </div>
+                        <div *ngIf="!accordionItem['collapsedValue']">
+                            <div *ngFor="let parameter of getParameters(endpointDataGroup).controls; let i=index" #paramRow>                            
+                                <form [formGroup]="parameter" class="row">
+                                    <input fullWidth nbInput type="text" fieldSize="tiny" placeholder="ICCID" formControlName="parameterName">
+    
+                                    <nb-select fullWidth size="tiny" placeholder="Header" formControlName="in">
+                                        <nb-option value="header">Header</nb-option>
+                                        <nb-option value="query">Query</nb-option>
+                                    </nb-select>
+    
+                                    <nb-select fullWidth size="tiny" placeholder="Type" formControlName="type">
+                                        <nb-option *ngFor="let type of constants.PARAMETER_TYPES" [value]="type">{{ type | titlecase }}</nb-option>
+                                    </nb-select>
+    
+                                    <nb-radio-group formControlName="hardcoded" name="hardcoded" status="info"> 
+                                        <nb-radio value="true">True</nb-radio>
+                                        <nb-radio value="false">False</nb-radio>
+                                    </nb-radio-group>
+    
+                                    <div *ngIf="parameter.get('hardcoded').value==='true'; else selectLocation">
+                                        <input fullWidth nbInput type="text" fieldSize="tiny" placeholder="null" formControlName="value">
+                                    </div>
+                                    <ng-template #selectLocation>
+                                        <nb-select fullWidth size="tiny" placeholder="Location" formControlName="value">
+                                            <nb-option *ngFor="let location of constants.LOCATIONS" [value]="location">{{ location }}</nb-option>
+                                        </nb-select>
+                                    </ng-template>
+    
+                                    <nb-radio-group formControlName="required" name="paramRequired" status="info"> 
+                                        <nb-radio value="true">True</nb-radio>
+                                        <nb-radio value="false">False</nb-radio>
+                                    </nb-radio-group>
+    
+                                    <nb-icon class="delete-btn" icon="close-square-outline" status="danger" (click)="onDeleteParameter(endpointDataGroup, i)"></nb-icon>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Body -->
+                <div class="section" id="body" *ngIf="intent!=='Populate-Values' || bodyContentToPopulate(endpointDataGroup.get('body').get('bodyContent'))">
+                    <div class="title">
+                        <span class="caption-2">Body</span>
+                    </div>
+                    <form [formGroup]="endpointDataGroup.get('body')">
+                        <div class="field">
+                            <span class="caption-1">Type: </span>
+                            <nb-select fullWidth placeholder="Object" size="tiny" formControlName="type">
+                                <nb-option *ngFor="let type of constants.BODY_TYPES" [value]="type">{{ type | titlecase }}</nb-option>
+                            </nb-select>
+                        </div>
+                        <div class="field">
+                            <span class="caption-1">Content Type(s): </span>
+                            <nb-select multiple filled="false" placeholder="Application/JSON" formControlName="contentTypes" size="tiny" fullWidth>
+                                <nb-option *ngFor="let option of ['application/json', 'application/xml', '*/*']" [value]="option">{{ option }}</nb-option>
+                            </nb-select>
+                        </div>
+                        <div class="field">
+                            <span class="caption-1">Required: </span>
+                            <nb-radio-group formControlName="required" status="info"> 
+                                <nb-radio value="true">True</nb-radio>
+                                <nb-radio value="false">False</nb-radio>
+                            </nb-radio-group>
+                        </div>
+                    </form>
+                    <div class="row" *ngIf="endpointDataGroup.get('body').get('bodyContent')">
+                        <div id="content-builder">
+                            <span class="caption-1">Body Content</span>
+                            <div class="body-content">
+                                <body-content-builder [bodyContent]="intent==='Populate-Values' ? endpointDataGroup.get('body').get('bodyContent').get('ROOT') : endpointDataGroup.get('body').get('bodyContent')" [intent]="intent"></body-content-builder>
+                            </div>
+                        </div>
+                        <div id="content-view">
+                            <span class="caption-1">View</span>
+                            <div class="json-view">
+                                <pre>{{ endpointDataGroup.get('body').get('bodyContent').get('ROOT').value | json }}</pre>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    
+            </nb-accordion-item-body>
+        </nb-accordion-item>
+    </nb-accordion>
+</div>

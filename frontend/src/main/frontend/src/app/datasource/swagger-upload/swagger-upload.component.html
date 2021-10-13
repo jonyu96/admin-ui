@@ -1,0 +1,45 @@
+<nb-card>
+    <nb-card-header>
+        <div class="steps">
+            <span class="caption-3" [ngClass]="getStepStatus(0)">1. Upload Swagger</span>
+            <nb-icon icon="arrow-forward"></nb-icon>
+            <span class="caption-3" [ngClass]="getStepStatus(1)">2. Enter Details</span>
+            <nb-icon icon="arrow-forward"></nb-icon>
+            <span class="caption-3" [ngClass]="getStepStatus(2)">3. Populate Values</span>
+            <nb-icon icon="arrow-forward"></nb-icon>
+            <span class="caption-3" [ngClass]="getStepStatus(3)">4. Review Datasource</span>
+        </div>
+        <div class="btns-container">
+            <button [disabled]="step===0 ? 'true' : 'false'" style="margin-right: 1rem" nbButton status="basic" size="tiny" (click)="onPrevious()">Previous</button>
+            <button size="tiny" nbButton (click)="onNext()" status="primary">{{ step===3 ? 'Add' : 'Next' }}</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body [nbSpinner]="loading" nbSpinnerStatus="info">
+
+        <div *ngIf="step===0" class="section">
+            <div class="title">
+                <span class="caption-2">Swagger File</span>
+            </div>
+            <div class="file-container">
+                <input style="display: none" type="file" #fileUpload onclick="value = null" (change)="onUploadFileClick($event)" />
+                <button nbButton (click)="fileUpload.click()" size="tiny" status="basic">Upload</button>
+                <div class="file-input-container">
+                    <nb-icon icon="file-text-outline"></nb-icon>
+                    <span class="caption">{{ file ? file.name : '--' }}</span>
+                </div>
+            </div>
+        </div>  
+
+        <div *ngIf="step===1 && datasource" class="section">
+            <app-datasource-form [datasource]="datasource" [submitted]="submitted"></app-datasource-form>
+        </div>
+
+        <div *ngIf="step===2 && datasource" class="section">
+            <app-endpoint-form [datasource]="datasource" [submitted]="submitted" [intent]="'Populate-Values'"></app-endpoint-form>
+        </div>  
+
+        <div *ngIf="step===3 && datasource" class="section">
+            <app-datasource-view [datasource]="datasource"></app-datasource-view>
+        </div>
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,58 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-3 text-alternate">{{ parent ? parent : 'Populate Value' }}</span>
+        <div class="btns-container">
+            <button style="margin-right: 1rem;" nbButton [status]="propForm.valid ? 'success' : 'basic'" size="tiny" (click)="onSubmit()">{{ propValue ? 'Save' : 'Add' }}</button>
+            <button nbButton status="danger" size="tiny" (click)="onCancel()">Cancel</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="propForm">
+            <div class="section" id="key">
+                <div class="title" style="padding-bottom: .7rem;">
+                    <span class="text-basic caption-2">Key</span>
+                </div>
+                <input nbInput fullWidth type="text" fieldSize="tiny" 
+                    formControlName="key" placeholder="Key Name" [status]="submitted && key.invalid ? 'warning' : 'basic'">
+            </div>
+
+            <div class="section" id="value">
+                <div class="title">
+                    <span class="text-basic caption-2">Value</span>
+                    <div class="field">
+                        <span class="text-hint caption">Hard Coded: </span>
+                        <nb-radio-group (valueChange)="onHardcodedChange($event)" formControlName="hardCoded" name="hardCoded" [status]="hardCoded.invalid && submitted ? 'warning' : 'info'"> 
+                            <nb-radio value="true">Yes</nb-radio>
+                            <nb-radio value="false">No</nb-radio>
+                        </nb-radio-group>
+                    </div>
+                </div>
+                <div class="row">
+                    <nb-select formControlName="valueType" placeholder="Type" size="tiny" fullWidth (selectedChange)="onValueTypeChange($event)" [status]="valueType.invalid && submitted ? 'warning' : 'basic'">
+                        <nb-option value="integer">Integer</nb-option>
+                        <nb-option value="string">String</nb-option>
+                        <nb-option value="boolean">Boolean</nb-option>
+                        <nb-option *ngIf="hardCoded.value !== 'false' && !this.propValue" value="object">Object</nb-option>
+                    </nb-select>
+
+                    <div class="field" style="margin-left: 1rem;">
+                        <span class="text-hint caption">Array: </span>
+                        <nb-radio-group formControlName="isArray" name="isArray" [status]="isArray.invalid && submitted ? 'warning' : 'info'"> 
+                            <nb-radio value="true" [disabled]="isArray.disabled">Yes</nb-radio>
+                            <nb-radio value="false" [disabled]="isArray.disabled">No</nb-radio>
+                        </nb-radio-group>
+                    </div>
+                </div>
+                
+                <input *ngIf="hardCoded.value!=='false'; else selectLocation" nbInput fullWidth type="text" fieldSize="tiny" 
+                    formControlName="value" placeholder="Value String" [status]="submitted && value.invalid ? 'warning' : 'basic'">
+                
+                <ng-template #selectLocation>
+                    <nb-select formControlName="value" fullWidth placeholder="Location" size="tiny" [status]="value.invalid && submitted ? 'warning' : 'basic'">
+                        <nb-option *ngFor="let option of constants.LOCATIONS" [value]="option">{{ option }}</nb-option>
+                    </nb-select>
+                </ng-template>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

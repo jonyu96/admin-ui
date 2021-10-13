@@ -1,0 +1,24 @@
+@import '../../../styles/vars.scss';
+
+nb-card {
+    max-width: 1325px;
+    max-height: 700px;
+    border: none;
+    background-color: $tmo-white;
+}
+
+nb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border: none;
+    background-color: $tmo-gray;
+
+    button {
+        width: 60px;
+    }
+}
+
+nb-card-body {
+    position: relative;
+}

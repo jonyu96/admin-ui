@@ -1,0 +1,31 @@
+@import 'src/styles/vars.scss';
+
+:host {
+    height: 100%;
+    width: 100%;
+    
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+nb-icon {
+    color: $tmo-pink;
+    font-size: 1.5rem;
+    margin-right: .3rem;
+}
+
+span:first-child {
+    display: flex;
+    align-items: center;
+    font-size: 1.3rem;
+}
+
+span:nth-child(2) {
+    margin-left: .5rem;
+}

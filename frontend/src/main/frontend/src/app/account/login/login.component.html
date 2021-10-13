@@ -1,0 +1,16 @@
+<div class="login-container">
+    <app-logo></app-logo>
+    <h1>Login</h1>
+    <div class="row" *ngIf="isDevLogin">
+        <app-custom-input [inputControl]="username" [submitted]="submitted" [placeholder]="'Username'"></app-custom-input>
+    </div>
+    <div class="nt-sso" (click)="onLoginClick()" [nbSpinner]="loading" nbSpinnerStatus="info">
+        <span class="caption-2 text-basic" *ngIf="!loading; else verifyMsg">{{ isDevLogin ? 'Dev Login' : 'NT SSO' }}</span>
+        <ng-template #verifyMsg>
+            <span class="caption-2 text-basic">Verifying User</span>
+        </ng-template>
+        <nb-icon icon="log-in"></nb-icon>
+    </div>
+    
+    <span id="register-link" class="caption text-basic">Need access? <a routerLink="../register" class="caption-2 text-basic">Register.</a></span>
+</div>

@@ -1,0 +1,37 @@
+<div class="container">
+    <nb-card>   
+        <nb-card-header>
+            <span class="caption-3">Datasources</span>
+            <div class="btns-container">
+                <div class="btn" (click)="onAddDatasource()">
+                    <nb-icon icon="plus-square"></nb-icon>
+                </div>
+                <div class="btn" (click)="onUploadSwagger()">
+                    <nb-icon icon="file-add"></nb-icon>
+                </div>
+            </div>
+        </nb-card-header>
+        <nb-card-body id="datasources">
+            <ngx-skeleton-loader *ngIf="!datasources; else datasourceContainers"
+                count="8"
+                animation="pulse"
+                [theme]="{
+                    'border-radius': '0rem',
+                    'height': '15%',
+                    'width': '45%',
+                    'animation': '1s cubic-bezier(.4,0,.2,1) infinite pulse'
+                }"
+            ></ngx-skeleton-loader>
+            <ng-template #datasourceContainers>
+                <div class="items-container" *ngIf="datasources">
+                    <div class="item" *ngFor="let d of datasources" (click)="onClickDatasource(d)" [ngClass]="{'clicked' : datasource && datasource['name'] === d['name']}">
+                        <span class="caption-2">{{ d['name'] }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </nb-card-body>
+    </nb-card>
+
+    <app-datasource-view [datasource]="datasource" [showActions]="true" [user]="user" (datasourceModified)="onDatasourceModified($event)" (datasourceDeleted)="onDatasourceDeleted($event)"
+        (updateDatasource)="onUpdateDatasource($event)"></app-datasource-view>
+</div>

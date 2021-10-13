@@ -1,0 +1,20 @@
+{
+    "users": [
+      {
+          "username": "jyu23",
+          "email": "jonathan.yu23@t-mobile.com",
+          "first_name": "Jonathan",
+          "last_name": "Yu",
+          "slack_id": null,
+          "permissions": {
+              "ZOEY_ADMIN": [
+                  "super"
+              ]
+          },
+          "requested_permissions": {
+              "PV_RULE": ["create"]
+          },
+          "pier_support_group": null
+      }
+    ]
+  }

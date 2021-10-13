@@ -1,0 +1,53 @@
+@import 'src/styles/vars.scss';
+
+#datasourceForm {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+    
+    margin-bottom: 1rem;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    padding-left: .5rem;
+}
+
+.title {
+    height: 40px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid #e4e9f2;
+    
+    span {
+        color: $tmo-pink;
+    }
+}
+
+.field {
+    margin-top: .5rem;
+}
+
+.field > input, .field > nb-select, .field > nb-form-field {
+    margin-top: .3rem;
+}
+
+.row, .header-field {
+    display: grid;
+    grid-template-columns: 1fr 1fr .2fr;
+    column-gap: 1.5rem;
+
+    align-items: center;
+    position: relative;
+}
+
+.header-field {
+    margin-top: .5rem;
+}
+
+.row {
+    margin-top: .2rem;
+}

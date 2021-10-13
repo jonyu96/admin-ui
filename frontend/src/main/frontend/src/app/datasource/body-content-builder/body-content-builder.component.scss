@@ -1,0 +1,137 @@
+@import 'src/styles/vars.scss';
+
+$type-colors: (
+  string: #FF6B6B,
+  dark-string: #FF6B6B,
+
+  number: #009688,
+  dark-number: #009688,
+  
+  boolean: #b938a4,
+  dark-boolean: #b938a4,
+
+  date: #05668D,
+
+  array: #999,
+  dark-array: #999,
+
+  object: #000,
+  dark-object: #fff,
+
+  array-object: #000,
+  dark-array-object: #fff,
+
+  function: #999,
+
+  'null': #db2c66,
+  undefined: #db2c66
+);
+
+:host {
+  width: 100%;
+}
+
+.custom-json-viewer {
+  font-family: monospace;
+  font-size: .8rem;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+
+  .segment {
+
+    .segment-main {
+      word-wrap: break-word;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      padding: 1px 0;
+      margin-bottom: 5px;
+      position: relative;
+      
+      .segment-key {
+        color: #4E187C;
+      }
+
+      .segment-key-dark {
+        color: #5ab4e9;
+      }
+
+      .segment-separator {
+        color: #999;
+      }
+
+      .segment-value {
+        color: #000;
+      }
+
+      .title {
+        max-width: 80%;
+      }
+
+      .actions {
+        position: absolute;
+        right: 0;
+        top: 0;
+
+        width: 100px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+
+        .action {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+        }
+
+        .action:first-child {
+          border-right: 1.5px solid #e4e9f2;
+        }
+        
+        nb-icon:not(#checkmark) {
+          cursor: pointer;
+          color: $tmo-black;
+
+          &:hover {
+            color: $tmo-pink;
+          }
+        }
+      }
+    }
+
+    .children {
+      margin-left: 12px;
+    }
+
+    .hide {
+      display: none;
+    }
+  }
+
+  @each $type, $color in $type-colors {
+    .segment-type-#{$type} > .segment-main > .title > .segment-value {
+      color: $color;
+    }
+  }
+
+  // special cases need highlightted
+  .segment-type-null > .segment-main > .segment-value {
+    background-color: red;
+  }
+  .segment-type-undefined > .segment-main {
+    & > .segment-key {
+      color: #999;
+    }
+    & > .segment-value {
+      background-color: #999;
+    }
+  }
+  .segment-type-object > .segment-main,
+  .segment-type-array > .segment-main {
+    white-space: nowrap;
+  }
+}

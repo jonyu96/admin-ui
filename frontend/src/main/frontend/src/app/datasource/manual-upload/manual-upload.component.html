@@ -1,0 +1,16 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-3 text-alternate"><nb-icon icon="layers-outline"></nb-icon>{{ ' ' + this.intent.replace('-', ' ') }}</span>
+        <div class="btns-container">
+            <button style="margin-right: 2rem;" nbButton status="success" size="tiny" (click)="onSubmit()">
+                {{ intent === 'Add-Datasource' || intent === 'Add-Endpoint' ? 'Add' : 'Save' }}</button>
+            <button nbButton status="danger" size="tiny" (click)="onCancel()">Cancel</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body [nbSpinner]="loading" nbSpinnerSize="large" nbSpinnerStatus="success" nbSpinnerMessage="">
+        
+        <app-datasource-form *ngIf="intent==='Add-Datasource' || intent==='Edit-Datasource'" [datasource]="datasource" [submitted]="submitted"></app-datasource-form>
+        <app-endpoint-form *ngIf="intent==='Add-Datasource' || intent==='Add-Endpoint' || intent==='Edit-Endpoint'" [endpoint]="endpoint" [intent]="intent" [submitted]="submitted"></app-endpoint-form>
+
+    </nb-card-body>
+</nb-card>

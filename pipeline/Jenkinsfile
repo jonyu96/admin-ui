@@ -1,0 +1,4 @@
+library 'pipeline-common'
+acmsPipeline {
+    team = "acms"
+}

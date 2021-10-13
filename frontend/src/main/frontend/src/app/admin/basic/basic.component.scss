@@ -1,0 +1,69 @@
+@import 'src/styles/vars.scss';
+
+nb-accordion {
+    nb-accordion-item {
+        background: $tmo-gray;
+    }
+
+    nb-accordion-item-header {
+        border-radius: 0rem;
+        padding: 1rem;
+        color: $tmo-white;
+
+        span {
+            color: $tmo-white;
+            display: flex;
+            align-items: center;
+        }
+    }
+
+    nb-accordion-item-body {
+        background-color: $tmo-white;
+    }
+}
+
+.sections-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 2rem;
+    padding: 1rem;
+    
+    span {
+        color: $tmo-black;
+    }
+
+}
+
+.section-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+
+    span {
+        display: flex;
+        align-items: center;
+    }
+}
+
+nb-icon, fa-icon {
+    margin-right: .5rem;
+}
+
+.section-content {
+    display: flex;
+    flex-direction: column;
+    
+    nb-tag {
+        width: 35%;
+        text-align: center;
+    }
+
+    nb-tag:not(last-child) {
+        margin-bottom: .3rem;
+    }
+}
+
+#available-permissions nb-tag {
+    cursor: pointer;
+}

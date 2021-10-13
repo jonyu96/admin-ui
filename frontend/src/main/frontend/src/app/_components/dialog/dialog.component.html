@@ -1,0 +1,28 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-2 text-alternate">{{ message }}</span>
+        <div class="buttons-container">
+            <button nbButton status="success" size="tiny" (click)="onYes()">Yes</button>
+            <button nbButton status="danger" size="tiny" (click)="onNo()">No</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body *ngIf="admin">
+        <div *ngIf="admin==='basic'; else updatePermissions">
+            <div class="row">
+                <span class="caption-1 text-basic">{{ app | appName }}</span>
+                <div class="permissions">
+                    <nb-tag *ngFor="let permission of permissions" [text]="permission" size="tiny" status="info"></nb-tag>
+                </div>
+            </div>
+        </div>
+
+        <ng-template #updatePermissions>
+            <div class="row" *ngFor="let item of permissions | keyvalue">
+                <span class="caption-1 text-basic">{{ item.key | appName }}</span>
+                <div class="permissions">
+                    <nb-tag *ngFor="let permission of item.value" [text]="permission" size="tiny" [status]="action && action==='approve' ? 'basic' : 'info'"></nb-tag>
+                </div>
+            </div>
+        </ng-template>
+    </nb-card-body>
+  </nb-card>

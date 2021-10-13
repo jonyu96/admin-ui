@@ -1,0 +1,78 @@
+@import '../../../styles/vars.scss';
+
+nb-card {
+    max-height: 700px;
+    border: none;
+}
+
+nb-card-header {
+    border: none;
+    background-color: $tmo-gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+nb-card-header nb-icon {
+    color: $tmo-white;
+    margin: 0 1rem;
+}
+
+.btns-container {
+    display: flex;
+    align-items: center;
+    margin-left: 2rem;
+
+    button {
+        width: 70px;
+    }
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    height: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-bottom: .2rem;
+    border-bottom: 2px solid #e4e9f2;
+    
+    span {
+        color: $tmo-black;
+    }
+}
+
+.file-container {
+    margin-top: .5rem;
+    display: flex;
+    align-items: center;
+
+    button {
+        margin-right: 1rem;
+    }
+}
+
+.file-input-container {
+    display: flex;
+    align-items: center;
+
+    width: 100%;
+    background-color: $tmo-gray;
+    padding: .25rem .5rem;
+    border: 2px solid $tmo-gray;
+
+    position: relative;
+
+    span, nb-icon {
+        color: $tmo-white;
+    }
+
+    nb-icon {
+        margin-right: 1rem;
+    }
+}

@@ -1,0 +1,20 @@
+@import 'src/styles/vars.scss';
+
+fa-icon, span:not(#admin) {
+    color: $tmo-pink;
+}
+
+fa-icon {
+    font-size: .8rem;
+    margin-left: .5rem;
+}
+
+.title {
+    margin-top: .1rem;
+    display: flex;
+}
+
+span:not(#admin) {
+    font-size: 1rem;
+    margin-right: .2rem;
+}

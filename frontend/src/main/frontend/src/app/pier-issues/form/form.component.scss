@@ -1,0 +1,52 @@
+@import '../../../styles/vars.scss';
+
+nb-card {
+    width: 1000px;
+    max-width: 1000px;
+    max-height: 700px;
+    border: none;
+    background-color: $tmo-white;
+}
+
+nb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    border: none;
+    background-color: $tmo-gray;
+
+    button {
+        width: 60px;
+    }
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 1.5rem;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+.field {
+    display: flex; 
+    flex-direction: column; 
+    width: 100%;
+
+    span:first-child {
+        margin-bottom: .3rem;
+    }
+}
+
+.title {
+    margin: 1rem 0;
+    border-bottom: 2px solid #e4e9f2;
+    padding-bottom: .3rem;
+
+    span {
+        color: $tmo-pink;
+    }
+}

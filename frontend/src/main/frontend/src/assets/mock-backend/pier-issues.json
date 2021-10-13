@@ -1,0 +1,54 @@
+{
+    "issues": [
+        {
+            "issue": "IncompatibleRatePlan",
+            "pierDetails": {
+                "configItem": "OCDEFSUB",
+                "cause": [
+                    "Apple Watch ODA - Stand Alone-1",
+                    "Apple Watch ODA - Stand Alone-1",
+                    "Apple Watch ODA - Stand Alone-1"
+                ],
+                "resolution": "No Trouble Found",
+                "resolutionDescription": "Please Educate the user to pair the watch in correct mode based on the ratePlan that is active. If the ratePlan doesn't belong to Standalone RatePlan then please use a valid Digits RatePlan to go through the activation.",
+                "status": "Resolved"
+            }
+        },
+        {
+            "issue": "BanMismatch-Released",
+            "pierDetails": {
+                "configItem": "OCDEFSUB",
+                "cause": [
+                    "Postpaid eSIM Activation - Apple iPhones"
+                ],
+                "resolution": "BILLING ACCOUNT DISCREPANCY",
+                "resolutionDescription": "We have cancelled the ICCID that was released for this customer's EID but activated on a different Sec MSISDN. Please activate the customer's secondary MSISDN to a new ICCID and walk the customer through device reset and ODA.",
+                "status": "Resolved"
+            }
+        },
+        {
+            "issue": "Plan Not in Use",
+            "pierDetails": {
+                "configItem": "OCDEFSUB",
+                "cause": [
+                    "Postpaid eSIM Activation - Apple iPhones"
+                ],
+                "resolution": "No Trouble Found",
+                "resolutionDescription": "From an activation standpoint, everything looks correct for this customer. Care, please use eSIM Lookup tool available in Grand Central to verify that ODA has gone through. Direct customer to try the following: 1. turn on  Airplane mode on the phone 2. turn on and off Airplane mode on watch 3. turn Airplane mode off on the phone This may sync the device and phone to restore cellular. If cellular issues persist, please use the DIGITS flows and refile a ticket with the correct ticket type.",
+                "status": "No Trouble Found"
+            }
+        },
+        {
+            "issue": "BanMismatch-Installed",
+            "pierDetails": {
+                "configItem": "OCDEFSUB",
+                "cause": [
+                    "Android ODA"
+                ],
+                "resolution": "Redemption Issues",
+                "resolutionDescription": "Engineering has released a new ICCID, <XXXX>, for this EID. Care, please SIM swap the customer's secondary MSISDN to this ICCID and direct the customer to retry ODA.",
+                "status": "Resolved"
+            }
+        }
+    ]
+}

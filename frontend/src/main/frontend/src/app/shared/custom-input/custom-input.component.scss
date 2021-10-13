@@ -1,0 +1,73 @@
+@import '../../../styles/vars.scss';
+
+.custom-field {
+    position: relative;
+    font-size: .6rem;
+    border-top: 20px solid transparent;
+    --field-padding: .6rem;
+  }
+
+.custom-field input {
+    border: none;
+    -webkit-appearance: none;
+    -ms-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    background: $tmo-white;
+    padding: var(--field-padding);
+    border: 2px solid $tmo-black;
+    outline: none;
+    width: 100%;
+}
+
+.custom-field .placeholder {
+    position: absolute;
+    left: .5rem;
+    width: calc(100% - (var(--field-padding) * 2));
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    top: .4rem;
+    line-height: 100%;
+    transform: translateY(-50%);
+    color: $tmo-black;
+    transition: 
+      top 0.3s ease,
+}
+
+.custom-field input.dirty + .placeholder,
+.custom-field input:focus + .placeholder,
+.custom-field input:not(:placeholder-shown) + .placeholder {
+    top: -.7rem;
+}
+
+.custom-field.cool input {
+    background: $tmo-white;
+    transition: border-color 0.3s ease;
+}
+
+.custom-field.cool input.dirty,
+.custom-field.cool input:not(:placeholder-shown),
+.custom-field.cool input:focus {
+  border-color: $tmo-pink;
+  transition-delay: 0.1s
+}
+
+.custom-field.cool input + .placeholder {
+    left: 8px;
+    padding: 0 5px;
+  }
+
+.custom-field.cool input.dirty + .placeholder,
+.custom-field.cool input:not(:placeholder-shown) + .placeholder,
+.custom-field.cool input:focus + .placeholder {
+  top: -.7rem;
+  font-size: 10px;
+  color: $tmo-black;
+  background: $tmo-white;
+  width: auto
+}
+
+.custom-field.cool input.invalid {
+    border-color: #ffaa00;
+}

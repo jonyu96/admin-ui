@@ -1,0 +1,63 @@
+@import 'src/styles/vars.scss';
+
+nb-card {
+    border: none;
+    min-width: 300px;
+}
+
+nb-card-header {
+    background-color: $tmo-gray;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+}
+
+.buttons-container {
+    margin-left: 2rem;
+
+    button {
+        width: 50px;
+    }
+
+    button:first-child {
+        margin-right: 1rem;
+    }
+}
+
+nb-card-body {
+    display: flex;
+    flex-direction: column;
+
+    span:not(:first-child) {
+        margin-top: 1rem; 
+    }
+}
+
+nb-card-footer {
+    display: flex;
+    justify-content: space-between;
+}
+
+
+nb-tag:not(:first-child) {
+    margin-left: .3rem;    
+}
+
+.row {
+    display: flex;
+    flex-direction: column;
+
+    &:not(:first-child) {
+        margin-top: 1rem;
+    }
+
+    > span {
+        padding-bottom: .2rem;
+        border-bottom: 1px solid $tmo-white-border;
+    }
+
+    .permissions {
+        margin-top: .5rem;
+    }
+}

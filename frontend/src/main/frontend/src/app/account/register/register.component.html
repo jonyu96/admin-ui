@@ -1,0 +1,51 @@
+<div class="register-container" *ngIf="!psRegistered; else psRegisteredScreenRef">
+    <app-logo></app-logo>
+    <h1>Register</h1>
+    <form [formGroup]="registerForm">
+        <div class="row">
+            <app-custom-input [inputControl]="firstName" [submitted]="submitted" [placeholder]="'First Name'"></app-custom-input>
+            <app-custom-input [inputControl]="lastName" [submitted]="submitted" [placeholder]="'Last Name'"></app-custom-input>
+        </div>
+        <div class="row">
+            <app-custom-input [inputControl]="username" [submitted]="submitted" [placeholder]="'NT ID'"></app-custom-input>
+            <app-custom-input [inputControl]="email" [submitted]="submitted" [placeholder]="'NT Email'"></app-custom-input>
+        </div>
+        <div class="row" *ngIf="isDevRegistration">
+            <div class="field">
+                <span class="caption-1">Admin Level: </span>
+                <nb-radio-group [formControl]="adminLevel" [status]="adminLevel.invalid && submitted ? 'warning' : 'info'"> 
+                    <nb-radio value="basic">Basic</nb-radio>
+                    <nb-radio value="super">Super</nb-radio>
+                </nb-radio-group>
+            </div>
+        </div>
+        <div *ngIf="isPsRegistration">
+            <div class="row">
+                <nb-select placeholder="Pier Support Group" formControlName="pier_support_group" size="tiny" fullWidth
+                    [ngClass]="[pierSupportGroup && pierSupportGroup.value ? 'filled' : '', submitted && pierSupportGroup && pierSupportGroup.invalid ? 'warning' : '']">
+                    <nb-option value="ACMS support">ACMS support</nb-option>
+                </nb-select>
+                <app-custom-input [inputControl]="slackId" [submitted]="submitted" [placeholder]="'Slack ID'"></app-custom-input>
+            </div>
+            <div class="row">
+                <div class="field" id="role-selection">
+                    <span class="caption-1">Role(s): </span>
+                    <div class="roles">
+                        <nb-checkbox [status]="submitted && roles.invalid ? 'warning' : 'basic'" *ngFor="let role of constants.ROLES" (checkedChange)="toggle($event, role)"
+                            >{{ role | uppercase }}</nb-checkbox>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <button id="register-btn" (click)="onRegisterClick()" nbButton size="tiny" [status]="registerForm.valid ? 'success' : 'basic'">Register</button>    
+    <span *ngIf="!isPsRegistration" id="login-link" class="caption text-basic">Already have access? <a routerLink="../login" class="caption-2 text-basic">Login</a></span>
+</div>
+
+<ng-template #psRegisteredScreenRef>
+    <div class="ps-registered-screen">
+        <h5>Success!</h5>
+        <span class="caption text-basic">An admin will approve your PS Bot access request shortly.</span>
+        <span id="login-link" class="caption-2 text-basic"><a routerLink="../login" class="caption-2 text-basic">Login to Zoey Admin.</a></span>
+    </div>
+</ng-template>

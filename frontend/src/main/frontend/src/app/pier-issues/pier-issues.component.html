@@ -1,0 +1,90 @@
+<div class="container">
+    <nb-card>   
+        <nb-card-header>
+            <span class="caption-3">Issues</span>
+            <div class="btns-container">
+                <div class="btn" (click)="onAddIssueClick()">
+                    <nb-icon icon="plus-square"></nb-icon>
+                </div>
+            </div>
+        </nb-card-header>
+        <nb-card-body>
+            <ngx-skeleton-loader *ngIf="!pierIssues; else issueContainers"
+                count="6"
+                animation="pulse"
+                [theme]="{
+                    'border-radius': '0rem',
+                    'height': '10%',
+                    'width': '100%',
+                    'animation': '1s cubic-bezier(.4,0,.2,1) infinite pulse'
+                }"
+            ></ngx-skeleton-loader>
+            <ng-template #issueContainers>
+                <div class="items-container">
+                    <div class="item" *ngFor="let issue of pierIssues" (click)="onIssueClick(issue)" [ngClass]="{'clicked' : pierIssue && pierIssue['issue'] === issue['issue']}">
+                        <span class="caption-2">{{ issue['issue'] }}</span>
+                    </div>
+                </div>
+            </ng-template>
+        </nb-card-body>
+    </nb-card>
+
+    <nb-card id="issue-display">
+        <nb-card-header>
+            <span class="caption-3 text-basic">{{ pierIssue ? pierIssue['issue'] : '--' }}</span>
+            <div class="btns-container">
+                <div class="btn" (click)="onEditIssueClick()">
+                    <nb-icon icon="edit"></nb-icon>
+                </div>
+                <div class="btn" (click)="onDeleteIssueClick()" style="margin-left: 2rem">
+                    <nb-icon icon="trash-2"></nb-icon>
+                </div>
+            </div>
+            <span class="caption-2 text-basic" id="error-code">Error Code: <span class="caption text-basic">{{ pierIssue && pierIssue['errorCode'] ? pierIssue['errorCode'] : '--' }}</span></span>
+        </nb-card-header>
+        <nb-card-body>
+            <div class="pier-details">
+                <div class="row">
+                    <span class="caption-2" id="pier-details-title">PIER DETAILS <nb-icon icon="arrowhead-down-outline"></nb-icon></span>
+                </div>
+                <div class="row">
+                    <div class="field">
+                        <span class="caption-2">Configuration Item:</span>
+                        <span class="caption">{{ pierIssue ? pierIssue['pierDetails']['configItem'] : '--' }}</span>
+                    </div>
+
+                    <div class="field">
+                        <span class="caption-2">Cause(s):</span>
+                        <ul *ngIf="pierIssue">
+                            <li *ngFor="let cause of pierIssue['pierDetails']['cause']"><nb-tag [text]="cause" size="tiny" status="info"></nb-tag></li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <span class="caption-2">Resolution:</span>
+                        <span class="caption">{{ pierIssue ? pierIssue['pierDetails']['resolution'] : '--' }}</span>
+                    </div>
+                </div>
+
+                <div class="row" style="grid-template-columns: 1fr;">
+                    <div class="field">
+                        <span class="caption-2">Resolution Description:</span>
+                        <span class="caption" id="resolution-description">{{ pierIssue ? pierIssue['pierDetails']['resolutionDescription'] : '--' }}</span>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="field">
+                        <span class="caption-2">Status:</span>
+                        <!-- <div>
+                            <nb-tag [text]="pierIssue ? pierIssue['pierDetails']['status'] : '--'" size="tiny" status="primary"></nb-tag>  
+                        </div> -->
+                        <span class="caption">{{ pierIssue ? pierIssue['pierDetails']['status'] : '--' }}</span>
+                    </div>
+                </div>
+            </div>
+        </nb-card-body>
+    </nb-card>
+</div>

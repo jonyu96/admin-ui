@@ -1,0 +1,67 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-3 text-alternate"><nb-icon icon="alert-circle-outline"></nb-icon> {{ (userAction==='Add' ? 'Add' : 'Edit') + ' Pier Issue' }}</span>
+        <div class="btns-container">
+            <button style="margin-right: 2rem;" nbButton [status]="form.valid ? 'success' : 'basic'" size="tiny" 
+                (click)="onSubmit()">{{ this.userAction === 'Add' ? 'Add' : 'Update' }}</button>
+            <button nbButton status="danger" size="tiny" (click)="onCancel()">Cancel</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body [nbSpinner]="loading" nbSpinnerSize="large" nbSpinnerStatus="success" accent="success" nbSpinnerMessage="">
+        <form [formGroup]="form">
+            <div class="row">
+                <div class="field">
+                    <span class="text-basic caption-2">Issue</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="issue" placeholder="Ex. IncompatibleRatePlan">
+                </div>
+
+                <div class="field">
+                    <span class="text-basic caption-2">Error Code</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="errorCode" placeholder="Null">
+                </div>
+            </div>
+        </form>
+
+        <form [formGroup]="form.get('pierDetails')">
+            <div class="title">
+                <span class="caption-2">Pier Details</span>
+            </div>
+    
+            <div class="row">
+                <div class="field">
+                    <span class="text-basic caption-2">Configuration Item</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="configItem" placeholder="Ex. OCDEFSUB" [status]="submitted && getControl('configItem').invalid ? 'warning' : 'basic'">
+                </div>
+    
+                <div class="field">
+                    <span class="text-basic caption-2">Cause</span>
+                    
+                    <nb-tag-list (tagRemove)="onRemoveTag($event)" size="tiny" fullWidth>
+                        <nb-tag *ngFor="let tag of cause.value; let i=index" [text]="tag | uppercase" size="tiny" status="info" removable></nb-tag>
+                        <input nbTagInput fieldSize="tiny" fullWidth type="text" (tagAdd)="onAddTag($event)" placeholder="Hit Enter to Add" [status]="submitted && getControl('cause').invalid ? 'warning' : 'basic'">
+                    </nb-tag-list>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <span class="text-basic caption-2">Resolution</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="resolution" placeholder="Ex. No Trouble Found" [status]="submitted && getControl('resolution').invalid ? 'warning' : 'basic'">
+                </div>
+
+                <div class="field">
+                    <span class="text-basic caption-2">Resolution Description</span>
+                    <textarea nbInput placeholder="Description of resolution." formControlName="resolutionDescription" fullWidth [status]="submitted && getControl('resolutionDescription').invalid ? 'warning' : 'basic'"></textarea>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field">
+                    <span class="text-basic caption-2">Status</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="status" placeholder="Ex. Resolved" [status]="submitted && getControl('status').invalid ? 'warning' : 'basic'">
+                </div>
+            </div>
+        </form>
+
+    </nb-card-body>
+</nb-card>

@@ -1,0 +1,30 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-3 text-alternate"><nb-icon icon="message-square"></nb-icon> PS Bot Registration</span>
+        <div class="btns-container">
+            <div class="btn">
+                <button nbButton [status]="psForm.valid ? 'success' : 'basic'" size="tiny" (click)="onYes()">Register</button>
+            </div>
+            <div class="btn">
+                <button nbButton status="danger" size="tiny" (click)="onNo()">Cancel</button>
+            </div>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <form [formGroup]="psForm">
+            <div class="field">
+                <app-custom-input [inputControl]="slackId" [submitted]="submitted" [placeholder]="'Slack ID'"></app-custom-input>
+            </div>
+            <div class="field">
+                <nb-select placeholder="Pier Support Group" formControlName="pier_support_group" size="tiny" fullWidth
+                    [ngClass]="[pierSupportGroup && pierSupportGroup.value ? 'filled' : '', submitted && pierSupportGroup && pierSupportGroup.invalid ? 'warning' : '']">
+                    <nb-option value="ACMS support">ACMS support</nb-option>
+                </nb-select>
+            </div>
+            <div class="field" id="roles">
+                <span class="caption-2 text-basic">Role(s):</span>
+                <nb-checkbox status="basic" *ngFor="let role of constants.ROLES" (checkedChange)="toggle($event, role)">{{ role | uppercase }}</nb-checkbox>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>

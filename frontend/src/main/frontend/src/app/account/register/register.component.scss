@@ -1,0 +1,157 @@
+@import 'src/styles/vars.scss';
+
+.register-container {
+    width: 500px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+app-logo {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.row {
+    width: 100%;
+    display: flex;
+    
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+
+    app-custom-input {
+        width: 100%;
+    }
+
+    app-custom-input:not(:first-child) {
+        margin-left: .5rem;
+    }
+}
+
+.field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+    span {
+        color: $tmo-black;
+        margin-right: .5rem; 
+    }
+}
+
+nb-checkbox.status-basic {
+    display: flex;
+    align-items: center;
+}
+
+nb-checkbox:not(:first-child) {
+    margin-left: 1rem; 
+}
+
+.roles {
+    display: flex;
+}
+
+#register-btn {
+    width: 100%;
+    margin: 2rem 0 2rem 0;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+#login-link {
+    color: $tmo-black;
+
+    a {
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: $tmo-pink;
+    }
+}
+
+.ps-registered-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;    
+
+    position: relative;
+
+    h5 {
+        font-size: 2rem;
+        margin: 0;
+        color: $tmo-pink;
+    }
+
+    span {
+        margin-top: 1rem;
+    }
+}
+
+::ng-deep {
+
+    .nb-theme-default {
+
+        nb-select.appearance-outline {
+
+            &.size-tiny .select-button {
+                padding: .45rem 1rem;
+    
+                &.placeholder {
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                }
+    
+                nb-icon {
+                    color: $tmo-black;
+                }
+            }
+    
+            &.status-basic .select-button {
+                background-color: $tmo-white;
+                border-color: $tmo-black;
+                font-size: 10px;
+    
+                &.placeholder {
+                    color: $tmo-black;
+    
+                }
+    
+                &:hover {
+                    background-color: $tmo-white;
+                    border-color: $tmo-black;
+                }
+    
+                &.bottom, &.top {
+                    border-color: $tmo-black;
+                }
+            }
+        }
+
+        nb-select {
+            &.filled.appearance-outline.status-basic .select-button {
+                border-color: $tmo-pink;
+            }
+
+            &.warning.appearance-outline.status-basic .select-button {
+                border-color: $tmo-warning;
+            }
+        }
+
+        nb-option-list.size-tiny nb-option {
+            font-size: 10px;
+            font-weight: 500;
+        }
+    }
+}
+

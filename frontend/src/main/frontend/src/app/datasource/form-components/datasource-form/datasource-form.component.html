@@ -1,0 +1,47 @@
+<form [formGroup]="datasourceForm" id="datasourceForm">
+    <div class="section" id="main-info">
+        <div class="title">
+            <span class="caption-2">Main Info</span>
+        </div>
+        <div class="column">
+            <div class="field">
+                <span class="caption-1">Name</span>
+                <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="name" placeholder="Name" [status]="name.invalid && submitted ? 'warning' : 'basic'">
+            </div>
+            <div class="field">
+                <span class="caption-1">Encoded Credentials</span>
+                <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="encodedCredentials" placeholder="Encoded Credentials" [status]="encodedCredentials.invalid && submitted ? 'warning' : 'basic'">
+            </div>
+            <div class="field">
+                <span class="caption-1">Host URL</span>
+                <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="hostUrl" placeholder="Host URL" [status]="hostUrl.invalid && submitted ? 'warning' : 'basic'">
+            </div>
+        </div>
+    </div>
+
+    <div class="section" id="no-data-handling">
+        <div class="title">
+            <span class="caption-2">No Data Found Handling</span>
+            <div class="btn" (click)="onAddNoDataHandle()">
+                <nb-icon icon="plus-square-outline" status="hint"></nb-icon>
+            </div>
+        </div>
+        <div class="column">
+            <div class="header-field">
+                <span class="caption-1">HTTP Code</span>
+                <span class="caption-1">Response String(s)</span>
+            </div>
+            <div *ngFor="let noDataHandleGroup of noDataHandle.controls; let i=index">
+                <form [formGroup]="noDataHandleGroup" class="row">
+                    <input fullWidth nbInput type="text" fieldSize="tiny" placeholder="Ex. 404" [formControl]="noDataHandleGroup.get('httpCode')" [status]="noDataHandleGroup.get('httpCode').invalid && submitted ? 'warning' : 'basic'">
+                    <nb-tag-list (tagRemove)="onRemoveString($event, noDataHandleGroup)" size="tiny" fullWidth>
+                        <nb-tag *ngFor="let tag of noDataHandleGroup.get('responseStrings').value; let i=index" [text]="tag" size="tiny" status="primary" removable></nb-tag>
+                        <input nbTagInput fieldSize="tiny" fullWidth type="text" (tagAdd)="onAddString($event, noDataHandleGroup)" [status]="noDataHandleGroup.get('responseStrings').invalid && submitted ? 'warning' : 'basic'"
+                            placeholder="Hit Enter to Add">
+                    </nb-tag-list>
+                    <nb-icon class="delete-btn" icon="close-square-outline" status="danger" (click)="onDeleteNoDataHandle(i)" style="cursor: pointer;"></nb-icon>
+                </form>
+            </div>
+        </div>
+    </div>
+</form>

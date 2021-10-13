@@ -1,0 +1,111 @@
+@import '../../../../styles/vars.scss';
+
+nb-card {
+    width: 500px;
+    border: none;
+}   
+
+nb-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: $tmo-gray;
+}
+
+nb-card-body {
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+    width: 100%;
+
+    &:not(:last-child) {
+        margin-bottom: 1rem;
+    }
+}
+
+app-custom-input {
+    width: 100%;
+}
+
+.roles {
+    display: flex;
+    align-items: center;
+    margin-left: .3rem;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+nb-checkbox {
+    display: flex;
+    align-items: center;
+}
+
+nb-checkbox:not(:first-child) {
+    margin-left: 1rem;
+}
+
+::ng-deep {
+
+    .nb-theme-default {
+
+        nb-select.appearance-outline {
+
+            &.size-tiny .select-button {
+                padding: .45rem 1rem;
+    
+                &.placeholder {
+                    font-size: 0.6rem;
+                    font-weight: 600;
+                }
+    
+                nb-icon {
+                    color: $tmo-black;
+                }
+            }
+    
+            &.status-basic .select-button {
+                background-color: $tmo-white;
+                border-color: $tmo-black;
+                font-size: 10px;
+    
+                &.placeholder {
+                    color: $tmo-black;
+    
+                }
+    
+                &:hover {
+                    background-color: $tmo-white;
+                    border-color: $tmo-black;
+                }
+    
+                &.bottom, &.top {
+                    border-color: $tmo-black;
+                }
+            }
+        }
+
+        nb-select {
+            &.filled.appearance-outline.status-basic .select-button {
+                border-color: $tmo-pink;
+            }
+
+            &.warning.appearance-outline.status-basic .select-button {
+                border-color: $tmo-warning;
+            }
+        }
+
+        nb-option-list.size-tiny nb-option {
+            font-size: 10px;
+            font-weight: 500;
+        }
+    }
+}

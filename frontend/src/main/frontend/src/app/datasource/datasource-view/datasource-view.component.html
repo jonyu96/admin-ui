@@ -1,0 +1,107 @@
+<nb-card id="datasource-view">
+    <nb-card-header>
+        <span class="caption-3 text-basic" id="datasourceName">{{ datasource ? datasource['name'] : '--' }}</span>
+        <div class="btns-container" *ngIf="showActions">
+            <div class="btn" (click)="onAddEndpoint()">
+                <nb-icon icon="plus-square"></nb-icon>
+            </div>
+            <div class="btn" (click)="onEditDatasource()">
+                <nb-icon icon="edit"></nb-icon>
+            </div>
+            <div class="btn" (click)="onDeleteDatasource()">
+                <nb-icon icon="trash-2"></nb-icon>
+            </div>
+        </div>
+        <div class="datasource-info">
+            <span class="caption-2 text-basic">Encoded Credentials: <span class="caption text-basic">{{ datasource ? datasource['encodedCredentials'] : '--' }}</span></span>
+            <span class="caption-2 text-basic">Host URL: <span class="caption text-basic">{{ datasource ? datasource['hostUrl'] : '--' }}</span></span>
+            <span class="caption-2 text-basic" id="no-data-handle" [nbPopover]="noDataHandlingRef" [nbPopoverTrigger]="datasource ? 'click' : 'noop'">No Data Handling<nb-icon icon="alert-triangle" [status]="datasource ? 'warning' : 'basic'"></nb-icon></span>
+        </div>
+    </nb-card-header>
+    <nb-card-body>
+        <nb-accordion *ngIf="datasource">
+            <nb-accordion-item #accordionItem *ngFor="let item of datasource['dataSource'] | keyvalue; let i=index">
+                <nb-accordion-item-header [ngClass]="['background-' + item.value['httpMethod']]" (click)="onSelectEndpoint(item.value)">
+                    <nb-tag [text]="item.value['httpMethod']" [status]="httpMethodStatus[item.value['httpMethod']]" size="small"></nb-tag>
+                    <span class="caption-2 text-basic" id="endpoint">{{ item.value['endpoint'] }}</span>
+                    <span class="caption-1" id="operationId">Operation ID: <span class="caption text-basic">{{ item.key }}</span></span>
+                    <div class="btns-container" *ngIf="showActions">
+                        <div class="btn" (click)="onEditEndpoint($event, item.value)">
+                            <nb-icon icon="edit"></nb-icon>
+                        </div>
+                        <div class="btn" (click)="onEndpointDelete($event, item.key)">
+                            <nb-icon icon="trash-2"></nb-icon>
+                        </div>
+                    </div>
+                </nb-accordion-item-header>
+                <nb-accordion-item-body>
+                    <div class="endpoint-info">
+                        <div class="caption-2 text-basic section-title">Parameters</div>
+                        <div [ngClass]="['parameters-section', 'background-' + item.value['httpMethod']]">
+                            <div class="columns headers">
+                                <span class="caption-2 text-basic">Name</span>
+                                <span class="caption-2 text-basic">Value</span>
+                            </div>
+                            <div class="div" *ngIf="!accordionItem['collapsedValue']">
+                                
+                                <div class="columns parameter" *ngFor="let param of endpoint['parameter']">
+                                    <div class="names">
+                                        <div class="name">
+                                            <span class="caption-2 text-basic" style="font-size: 1rem">{{ param['parameterName'] }}</span>
+                                            <span class="caption-2 text-danger required" *ngIf="param['required']">* required</span>
+                                        </div>
+                                        <span class="caption-1 text-basic" *ngIf="param['type']">{{ param['type'] }}</span>
+                                        <span class="caption text-basic" *ngIf="param['in']">({{ param['in'] }})</span>
+                                    </div>
+                                    <div class="values">
+                                        <span class="caption text-basic">{{ param['value'] }}</span>
+                                        <span class="caption-2 text-hint" *ngIf="param['hardcoded']" style="margin-left: .5rem">*hardcoded</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="columns body" *ngIf="bodyContent">
+                                    <div class="names">
+                                        <div class="name">
+                                            <span class="caption-2 text-basic" style="font-size: 1rem">body</span>
+                                            <span class="caption-2 text-danger required" *ngIf="endpoint['body']['required']">* required</span>
+                                        </div>
+                                        <span class="caption-1 text-basic">{{ endpoint['body']['type'] }}</span>        
+                                    </div>
+                                    <div class="values">
+                                        <span class="caption-2 text-basic value-title">Body Content</span>
+                                        <span class="caption text-basic">Schema</span>
+                                        <div class="json-container">
+                                            <body-content-builder *ngIf="bodyContent" [bodyContent]="bodyContent" viewOnly="true"></body-content-builder>
+                                        </div>
+                                        <div class="body-content-type">
+                                            <span class="caption-2 text-basic">Accepted Content Type(s)</span>
+                                            <ul>
+                                                <li *ngFor="let contentType of endpoint['body']['bodyContent'] | keyvalue"><span class="caption text-basic">{{ contentType.key }}</span></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </nb-accordion-item-body>
+            </nb-accordion-item>
+        </nb-accordion>
+    </nb-card-body>
+</nb-card>
+
+<ng-template #noDataHandlingRef>
+    <div class="no-data-handling">
+        <div class="header-field">
+            <span class="caption-2 text-alternate">CODE</span>
+            <span class="caption-2 text-alternate">RESPONSE</span>
+        </div>
+        <div class="row" *ngFor="let item of datasource['noDataStrings'] | keyvalue">
+            <span class="caption-2">{{ item.key }}</span>
+            <div class="tags">
+                <nb-tag *ngFor="let s of item.value" [text]="s" size="tiny" status="basic"></nb-tag>
+            </div>
+        </div>
+    </div>
+</ng-template>
+    

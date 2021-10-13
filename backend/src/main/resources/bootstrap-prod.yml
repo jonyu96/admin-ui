@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: zoey-admin-ui
+  profiles: prod
+  cloud:
+    config:
+      uri: http://zoey-config:8080/zoey-config
+      username: zoey
+      password:
+      retry:
+        max-attempts: 6
+        max-interval: 60000
+        multiplier: 2
+      fail-fast: true

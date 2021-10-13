@@ -1,0 +1,67 @@
+@import '../../../styles/vars.scss';
+
+nb-card {
+    width: 450px;
+    border: none;
+}
+
+nb-card-body {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+nb-card-header {
+    border: none;
+    background-color: $tmo-gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .btn {
+        width: 60px;
+    }
+}
+
+nb-radio-group {
+    margin-left: 1rem;
+    display: flex;
+}
+
+input, nb-select {
+    margin-top: .5rem;
+}
+
+form {
+    height: 100%;
+    width: 100%;
+}
+
+.section {
+    display: flex;
+    flex-direction: column;
+
+    &:first-child {
+        margin-bottom: 1rem;
+    }
+}
+
+.title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    border-bottom: 2px solid #e4e9f2;
+
+    margin-bottom: .5rem;
+}
+
+.row {
+    display: flex;
+    align-items: flex-start;
+}
+
+.field {
+    display: flex;
+    align-items: center;
+}
