@@ -1,0 +1,172 @@
+{
+    "datasources": [
+        {
+            "name": "JonAPI",
+            "dataSource": {
+                "jon_api": {
+                    "operationId": "hireJon",
+                    "endpoint": "/hire/jon",
+                    "httpMethod": "GET",
+                    "parameter": [
+                        {
+                            "parameterName": "param1",
+                            "in": "header",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "paramValue1"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {},
+                        "type": "",
+                        "required": false
+                    }
+                }
+            },
+            "encodedCredentials": "someEncodedCreds",
+            "hostUrl": "http://www.url.com",
+            "noDataCodes": [
+                404
+            ],
+            "noDataStrings": {
+                "404": [
+                    "Data not found."
+                ]
+            }
+        },
+        {
+            "name": "Petstore",
+            "dataSource": {
+                "createUsersWithListInput": {
+                    "operationId": "createUsersWithListInput",
+                    "endpoint": "/user/createWithList",
+                    "httpMethod": "POST",
+                    "parameter": [],
+                    "body": {
+                        "bodyContent": {
+                            "*/*": {
+                                "Pet": "{\"photoUrls\":[\"asdf\"],\"name\":\"asdf\",\"id\":1,\"category\":{\"name\":\"$$requestId\",\"id\":\"##SubscriptionId.imsi\"},\"tags\":[{\"name\":\"$$SubscriptionId.imei\",\"id\":1}],\"status\":\"asdf\"}"
+                            }
+                        },
+                        "type": "array",
+                        "required": true
+                    }
+                },
+                "deleteUser": {
+                    "operationId": "deleteUser",
+                    "endpoint": "/user/{username}",
+                    "httpMethod": "DELETE",
+                    "parameter": [
+                        {
+                            "parameterName": "username",
+                            "in": "path",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "asdf"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {},
+                        "type": null,
+                        "required": false
+                    }
+                },
+                "getUserByName": {
+                    "operationId": "getUserByName",
+                    "endpoint": "/user/{username}",
+                    "httpMethod": "GET",
+                    "parameter": [
+                        {
+                            "parameterName": "username",
+                            "in": "path",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "asdf"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {},
+                        "type": null,
+                        "required": false
+                    }
+                },
+                "loginUser": {
+                    "operationId": "loginUser",
+                    "endpoint": "/user/login",
+                    "httpMethod": "GET",
+                    "parameter": [
+                        {
+                            "parameterName": "username",
+                            "in": "query",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "asdf"
+                        },
+                        {
+                            "parameterName": "password",
+                            "in": "query",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "asdf"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {},
+                        "type": null,
+                        "required": false
+                    }
+                },
+                "logoutUser": {
+                    "operationId": "logoutUser",
+                    "endpoint": "/user/logout",
+                    "httpMethod": "GET",
+                    "parameter": [],
+                    "body": {
+                        "bodyContent": {},
+                        "type": null,
+                        "required": false
+                    }
+                },
+                "updateUser": {
+                    "operationId": "updateUser",
+                    "endpoint": "/user/{username}",
+                    "httpMethod": "PUT",
+                    "parameter": [
+                        {
+                            "parameterName": "username",
+                            "in": "path",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "asdf"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {
+                            "*/*": {
+                                "User": "{\"id\":1}"
+                            }
+                        },
+                        "type": null,
+                        "required": true
+                    }
+                }
+            },
+            "encodedCredentials": "asdf",
+            "hostUrl": "https://petstore.swagger.io/v2",
+            "noDataCodes": [
+                404
+            ],
+            "noDataStrings": {
+                "404": [
+                    "asdf"
+                ]
+            }
+        }
+    ]
+}

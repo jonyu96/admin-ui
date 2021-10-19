@@ -1,0 +1,26 @@
+<nb-layout>
+    <nb-layout-column>
+
+        <app-navbar *ngIf="user" [user]="user"></app-navbar>
+         
+
+        <div class="container">
+            <div class="page-title" *ngIf="currentRoute && !currentRoute.includes('/account') && !currentRoute.includes('/404')">
+                <nb-icon [icon]="PAGE_TITLES[currentRoute]['icon']"></nb-icon>
+                <div class="title">
+                    <h4>{{ PAGE_TITLES[currentRoute]['title'] }}</h4>
+                    <span class="caption text-basic">{{ PAGE_TITLES[currentRoute]['description'] }}</span>
+                </div>
+            </div>
+             
+            <div class="main-content">
+                <router-outlet></router-outlet> 
+            </div>
+        </div>
+        
+        <div class="badge-container">
+            <nb-badge text="V1" status="basic"></nb-badge>
+            <nb-badge text="DEMO" status="info" style="margin-left: 1rem;"></nb-badge>
+        </div>
+    </nb-layout-column>
+</nb-layout>

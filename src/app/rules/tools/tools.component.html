@@ -1,0 +1,68 @@
+<nb-card>
+    <nb-card-header>
+        <div class="tabs-container">
+            <ul class="Tabs">
+                <li class="Tabs__tab active Tab" (click)="activeTab='tab1'" [ngClass]="{'active' : activeTab==='tab1'}"><span class="caption-2 text-hint">Get Data</span></li>
+                <li class="Tabs__tab Tab" (click)="activeTab='tab2'" [ngClass]="{'active' : activeTab==='tab2'}"><span class="caption-2 text-hint">Test Rule</span></li>
+                <li class="Tabs__slider"></li>
+            </ul>
+        </div>
+        <ng-container *ngIf="activeTab==='tab1'; then tab1Content else tab2Content"></ng-container>
+        <ng-template #tab1Content>
+            <div class="form-container">
+                <form [formGroup]="dataForm">    
+                    <div class="row">
+                        <nb-select placeholder="System" formControlName="system" size="tiny" fullWidth
+                            [status]="submitted && system.invalid ? 'warning' : 'basic'" (selectedChange)="onSystemSelected($event)">
+                            <nb-option *ngFor="let item of constants.DATASOURCE_MAP | keyvalue" [value]="item.key">{{item.key}}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="row">
+                        <nb-select placeholder="API" formControlName="api" size="tiny" fullWidth
+                            [status]="submitted && api.invalid ? 'warning' : 'basic'">
+                            <nb-option *ngFor="let api of constants.DATASOURCE_MAP[selectedSystem]" [value]="api">{{api}}</nb-option>
+                        </nb-select>
+                        <input style="margin-left: .5rem" nbInput type="text" fieldSize="tiny" formControlName="msisdn" placeholder="MSISDN (10 Digit #)" fullWidth
+                            [status]="submitted && msisdn.invalid ? 'warning' : 'basic'">
+                    </div>
+                </form>
+                <button (click)="getDataResponse()" nbButton
+                    size="tiny" [status]="dataForm.invalid ? 'basic' : 'primary'">Get</button>
+            </div>
+        </ng-template>
+        <ng-template #tab2Content>
+            <div class="form-container">
+                <form [formGroup]="testForm">
+                    <div class="row">
+                        <nb-select placeholder="Rule ID" formControlName="ruleId" size="tiny" fullWidth
+                            [status]="submitted && ruleId.invalid ? 'warning' : 'basic'" (selectedChange)="onRuleSelect($event)">
+                            <nb-option *ngFor="let rule of rules" [value]="rule.rule_id">{{rule.rule_id}}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="row">
+                        <nb-select multiple filled="false" placeholder="Features" formControlName="featureList" size="tiny" fullWidth
+                                [status]="submitted && featureList.invalid ? 'warning' : 'basic'">
+                            <nb-option *ngFor="let feature of features; let i = index" [value]="feature">{{feature}}</nb-option>
+                        </nb-select>
+                        <input nbInput type="text" fieldSize="tiny" formControlName="subscriptionIds" placeholder="MSISDN (10 Digit #)" fullWidth
+                            [status]="submitted && subscriptionIds.invalid ? 'warning' : 'basic'" style="margin-left: .5rem">
+                    </div>
+                    </form>
+                <button (click)="getTestResponse()" nbButton
+                    size="tiny" [status]="testForm.invalid ? 'basic' : 'primary'">Test</button>
+            </div>
+        </ng-template>
+    </nb-card-header>
+    <nb-card-body>
+        <ngx-skeleton-loader *ngIf="loading"
+            count="7"
+            [theme]="{
+                height: '5px',
+                'border-radius': '0rem',
+                'background-color': '#ffffff',
+                'animation': '1s cubic-bezier(.4,0,.2,1) infinite pulse'
+            }"
+        ></ngx-skeleton-loader>
+        <ngx-json-viewer [json]="activeTab==='tab1' ? dataResponse : testResponse" [expanded]="false"></ngx-json-viewer>
+    </nb-card-body>
+</nb-card>

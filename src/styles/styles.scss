@@ -1,0 +1,146 @@
+@import 'themes';
+@import '~@nebular/theme/styles/globals';
+@import './vars.scss';
+
+@include nb-install() {
+  @include nb-theme-global();
+};
+
+/*************** Global text styling ***************/
+
+.caption-3 {
+  font-size: 1rem;
+}
+
+.caption-1 {
+  font-size: .6rem;
+  font-weight: 600;
+}
+
+span.danger {
+  color: #ff3d71 !important;
+}
+
+span.success {
+  color: #00d68f !important;
+}
+
+/*************** Global Components Styling ***************/
+
+.btn {
+  cursor: pointer;
+
+  color: $tmo-black;
+    transition: color 0.2s ease-in-out !important;
+  
+    &:hover {
+        color: $tmo-pink !important;
+    }
+}
+
+.btns-container {
+  display: flex;
+  align-items: center;
+
+  .btn:not(:first-child) {
+    margin-left: 1.5rem;
+  }
+
+}
+
+.items-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.item {
+  z-index: 100;
+  flex-basis: 45%;
+  height: 20%;
+  background-color: $tmo-dark-gray;
+
+  margin-bottom: 1rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1rem;
+
+  span {
+    color: $tmo-white !important;
+    word-break: break-all;
+  }
+
+  cursor: pointer;
+  transition: 0.2s ease;
+
+  &:hover {
+    transform: translateY(-.3rem);
+  }
+
+  &.clicked {
+    transform: translateY(-.3rem);
+
+    span {
+      color: $tmo-pink !important;
+    }
+  }
+}
+
+ngx-skeleton-loader {
+  .loader {
+    background: $tmo-gray !important;
+  }
+}
+
+/*************** Global Nebular Styling ***************/
+
+.nb-theme-default {
+
+  nb-card {
+    max-height: 500px;
+  }
+
+  nb-radio-group {
+    display: flex;
+    
+    nb-radio.status-info > label {
+      padding-right: .8rem !important;
+    }
+  }
+
+  nb-tag {
+    display: inline-block;
+    word-break: break-all !important;
+    text-transform: none;
+  }
+
+  nb-accordion {
+    box-shadow: none;
+    border-radius: 0;
+
+    nb-accordion-item {
+      margin-bottom: 1rem;
+      border-radius: 0 !important; 
+    }
+
+    nb-accordion-item-header {
+      border-radius: 0rem !important;
+      padding: 1rem;
+      color: $tmo-white;
+    }
+    
+    nb-accordion-item:not(:first-child) {
+      margin-top: .5rem;
+    }
+    
+    nb-accordion-item-body .item-body {
+      padding: 0;
+
+      border-bottom-left-radius: 0rem;
+      border-bottom-right-radius: 0rem;
+    }
+  }
+}

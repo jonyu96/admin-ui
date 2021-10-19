@@ -1,0 +1,28 @@
+{
+    "issues": [
+        {
+            "issue": "PierIssue1",
+            "pierDetails": {
+                "configItem": "ASDF",
+                "cause": [
+                    "PierIssue1- Cause1"
+                ],
+                "resolution": "RESOLUTION",
+                "resolutionDescription": "Resolution is resolution.",
+                "status": "Resolved"
+            }
+        },
+        {
+            "issue": "PierIssue2",
+            "pierDetails": {
+                "configItem": "GHJK",
+                "cause": [
+                    "PierIssue2- Cause2"
+                ],
+                "resolution": "CALL RESOLUTION",
+                "resolutionDescription": "Resolution is call resolution.",
+                "status": "Not Resolved"
+            }
+        }
+    ]
+}

@@ -1,2 +1,0 @@
-#org.springframework.cloud.bootstrap.BootstrapConfiguration = com.tmobile.cns.z.common.config.CustomConfigServiceBootstrapConfiguration
-org.springframework.boot.autoconfigure.EnableAutoConfiguration = com.tmobile.cns.z.common.config.SpringBootAdminClientDockerAutoConfiguration

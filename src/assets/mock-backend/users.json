@@ -1,0 +1,22 @@
+{
+  "users": [
+    {
+        "username": "BobRoss",
+        "email": "BobRoss@gmail.com",
+        "first_name": "Bob",
+        "last_name": "Ross",
+        "slack_id": "bob_ross123",
+        "permissions": {
+            "ADMIN": [
+                "basic"
+            ]
+        },
+        "requested_permissions": {
+            "RULE": [
+                "read"
+            ]
+        },
+        "pier_support_group": "psg123"
+    }
+  ]
+}

@@ -1,0 +1,107 @@
+{
+  "rules": 
+    [
+        {
+            "rule_id": "rule_1",
+            "rule_name": "Rule 1",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "rule.1.property": []
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "I am rule 1.",
+            "active": false,
+            "create_dttm": "2021-04-14T19:04:26.635Z",
+            "create_user": "jonyu96",
+            "mod_dttm": "2021-07-19T17:03:33.442Z",
+            "mod_user": "jonyu96",
+            "data_source": "datasource_1",
+            "subscription_data_keys": [
+                "rule.1.property"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "rule.1.property": ""
+            },
+            "criteria": {
+                "rule.1.property": {}
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ],
+            "default_response": "PASS"
+        },
+        {
+            "rule_id": "rule_2",
+            "rule_name": "Rule 2",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "rule.2.property": ["rule_1_value"]
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "I am rule 2.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:04:26.635Z",
+            "create_user": "jonyu96",
+            "mod_dttm": "2021-07-19T17:03:33.442Z",
+            "mod_user": "jonyu96",
+            "data_source": "datasource_1",
+            "subscription_data_keys": [
+                "rule.2.property"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "rule.2.property": ""
+            },
+            "criteria": {
+                "rule.2.property": {}
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ],
+            "default_response": "PASS"
+        },
+        {
+            "rule_id": "rule_2",
+            "rule_name": "Rule 2",
+            "data_type": "String",
+            "method": "exists",
+            "values": {
+                "rule.2.property": ["rule_1_value"]
+            },
+            "features": [
+                "INSTANT"
+            ],
+            "result_text": "I am rule 2.",
+            "active": true,
+            "create_dttm": "2021-04-14T19:04:26.635Z",
+            "create_user": "jonyu96",
+            "mod_dttm": "2021-07-19T17:03:33.442Z",
+            "mod_user": "jonyu96",
+            "data_source": "datasource_1",
+            "subscription_data_keys": [
+                "rule.2.property"
+            ],
+            "validate_external_data": false,
+            "external_data_key": {
+                "rule.2.property": ""
+            },
+            "criteria": {
+                "rule.2.property": {}
+            },
+            "system": "USD",
+            "event_types": [
+                "INSTANT_VALIDATION"
+            ],
+            "default_response": "PASS"
+        }
+    ]
+}

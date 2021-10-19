@@ -1,0 +1,14 @@
+{
+    "username": "jonyu96",
+    "email": "jonathanjyu96@gmail.com",
+    "first_name": "Jonathan",
+    "last_name": "Yu",
+    "slack_id": "jon_slack_96",
+    "permissions": {
+        "ADMIN": [
+            "super"
+        ]
+    },
+    "requested_permissions": {},
+    "pier_support_group": null
+}

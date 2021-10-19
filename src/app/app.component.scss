@@ -1,0 +1,72 @@
+@import "src/styles/vars.scss";
+
+nb-layout-column {
+    height: 100vh;
+    max-height: 100vh;
+    background: $tmo-white;
+
+    display: flex;
+
+    position: relative;
+    padding: 0% 5% 0% 0% !important;
+}
+
+.container {
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    align-items: center;
+    
+    margin-left: 5%;
+    position: relative;
+}
+
+
+.page-title {
+    display: flex;
+    position: absolute;
+    top: 6%;
+
+    nb-icon { font-size: 3.5rem; }
+    
+    .title {
+        margin-left: .5rem;
+        h4 { margin: 0; }
+    }
+}
+
+.main-content {
+    height: 500px;
+    max-height: 500px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.badge-container {
+    position: absolute;
+    bottom: 5%;
+    right: 5%;
+    
+    nb-badge {
+        position: relative;
+    }
+}
+
+@media (max-height: 900px) {
+    nb-layout-column {
+        min-height: 700px;
+    }
+}
+
+// @media (min-height: 900px) and (max-height: 1050px) {
+//     .page-title {
+//         top: 6%;
+//     }
+    
+//     .container {
+//         max-height: 550px;
+//     }
+// }

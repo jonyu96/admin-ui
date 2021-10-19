@@ -1,0 +1,33 @@
+{
+    "datasources": [
+        {
+            "name": "Swagger Example",
+            "dataSource": {
+                "swagger-api": {
+                    "operationId": "swagger",
+                    "endpoint": "/swagger",
+                    "httpMethod": "GET",
+                    "parameter": [
+                        {
+                            "parameterName": "param1",
+                            "in": "header",
+                            "required": true,
+                            "type": "string",
+                            "hardcoded": true,
+                            "value": "paramValue1"
+                        }
+                    ],
+                    "body": {
+                        "bodyContent": {
+                            "*/*": {
+                                "Pet": "{\"photoUrls\":[\"benji.jpg\"],\"name\":\"benji\",\"id\":1,\"category\":{\"name\":\"benji\",\"id\":\"benji123\"},\"tags\":[{\"name\":\"benji\",\"id\":1}],\"status\":\"chonky\"}"
+                            }
+                        },
+                        "type": "",
+                        "required": false
+                    }
+                }
+            }
+        }
+    ]
+}

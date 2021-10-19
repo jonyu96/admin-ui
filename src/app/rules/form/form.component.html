@@ -1,0 +1,146 @@
+<nb-card>
+    <nb-card-header>
+        <span class="caption-3 text-alternate"><nb-icon icon="flash-outline"></nb-icon> {{ (userAction==='Add' ? 'Add' : 'Edit') + ' Datasource' }}</span>
+        <div class="btns-container">
+            <button style="margin-right: 2rem;" nbButton [status]="ruleForm.valid ? 'success' : 'basic'" size="tiny" 
+                (click)="this.userAction === 'Add' ? onAdd() : onEdit()">{{ this.userAction === 'Add' ? 'Add' : 'Update' }}</button>
+            <button nbButton status="danger" size="tiny" (click)="onNo()">Cancel</button>
+        </div>
+    </nb-card-header>
+    <nb-card-body [nbSpinner]="loading" nbSpinnerSize="large" nbSpinnerStatus="success" accent="success" nbSpinnerMessage="">
+        <form [formGroup]="ruleForm">
+            <div class="row">
+                <div class="field" id="rule-id">
+                    <span class="text-basic caption-2">Rule ID</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="rule_id" placeholder="Rule ID" [status]="ruleId.invalid && submitted ? 'warning' : 'basic'">
+                </div>
+
+                <div class="field" id="rule-name">
+                    <span class="text-basic caption-2">Rule Name</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="rule_name" placeholder="Rule Name" [status]="ruleName.invalid && submitted ? 'warning' : 'basic'">
+                </div>
+
+                <div class="field" id="active">
+                    <span class="text-basic caption-2">Active</span>
+                    <nb-radio-group formControlName="active" name="active" [status]="active.invalid && submitted ? 'warning' : 'info'"> 
+                        <nb-radio value="true">True</nb-radio>
+                        <nb-radio value="false">False</nb-radio>
+                    </nb-radio-group>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field" id="features">
+                    <span class="text-basic caption-2">Features</span>
+                    
+                    <nb-tag-list (tagRemove)="onRemoveFeature($event)" size="tiny" fullWidth>
+                        <nb-tag *ngFor="let tag of features.value; let i=index" [text]="tag | uppercase" size="tiny" status="info" removable></nb-tag>
+                        <input nbTagInput fieldSize="tiny" fullWidth type="text" (tagAdd)="onAddFeature($event)" [status]="features.invalid && submitted ? 'warning' : 'basic'"
+                            placeholder="Enter to Add">
+                    </nb-tag-list>
+                </div>
+
+                <div class="field" id="data-type">
+                    <span class="text-basic caption-2">Data Type</span>
+                    <nb-select placeholder="Data Type" formControlName="data_type" size="tiny" fullWidth [status]="dataType.invalid && submitted ? 'warning' : 'basic'">
+                        <nb-option *ngFor="let option of ['String', 'boolean', 'Long']" [value]="option">{{option | titlecase}}</nb-option>
+                    </nb-select>
+                </div>
+
+                <div class="field" id="data-source">
+                    <div class="field-section">
+                        <span class="text-basic caption-2">Datasource</span>
+                        <nb-select placeholder="Datasource" formControlName="datasource" size="tiny" [status]="datasource.invalid && submitted ? 'warning' : 'basic'" (selectedChange)="onDatasourceChange($event)">
+                            <nb-option *ngFor="let datasource of datasources" [value]="datasource['name']">{{ datasource['name'] }}</nb-option>
+                        </nb-select>
+                    </div>
+                    <div class="field-section">
+                        <span class="text-basic caption-2">Endpoint</span>
+                        <nb-select placeholder="Endpoint" formControlName="endpoint" size="tiny" [status]="endpoint.invalid && submitted ? 'warning' : 'basic'">
+                            <nb-option *ngFor="let endpoint of endpoints" [value]="endpoint">{{ endpoint }}</nb-option>
+                        </nb-select>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field" id="result-text">
+                    <span class="text-basic caption-2">Result Text</span>
+                    <textarea nbInput placeholder="Result Text" formControlName="result_text" fullWidth [status]="resultText.invalid && submitted ? 'warning' : 'basic'"></textarea>
+                </div>
+
+                <div class="field" id="system">
+                    <span class="text-basic caption-2">System</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="system" placeholder="System" [status]="system.invalid && submitted ? 'warning' : 'basic'">
+                </div>
+
+                <div class="field" id="event-types">
+                    <span class="text-basic caption-2">Event Types</span>
+                    <nb-select multiple filled="false" placeholder="Event Types" formControlName="event_types" size="tiny" fullWidth
+                        [status]="eventTypes.invalid && submitted ? 'warning' : 'basic'">
+                        <nb-option *ngFor="let option of constants.EVENT_TYPES" [value]="option">{{option}}</nb-option>
+                    </nb-select>
+                </div>
+            </div>
+            <div class="row">
+                <div class="field" id="method">
+                    <span class="text-basic caption-2">Method</span>
+                    <nb-select (selectedChange)="onMethodChange($event)" placeholder="Method" formControlName="method" size="tiny" fullWidth [status]="method.invalid && submitted ? 'warning' : 'basic'">
+                        <nb-option *ngFor="let option of ['contains', 'equals', 'exists']" [value]="option">{{option !== 'allEquals' ? (option | titlecase) : (option)}}</nb-option>
+                    </nb-select>
+                </div>
+
+                <div class="field" id="validate-external-data">
+                    <span class="text-basic caption-2">Validate External Data</span>
+                    <nb-radio-group name="validateExternalData" formControlName="validate_external_data" (valueChange)="onValidateExternalDataChange($event)" [status]="validateExternalData.invalid && submitted ? 'warning' : 'info'"> 
+                        <nb-radio [disabled]="validateExternalData.disabled" value="true">True</nb-radio>
+                        <nb-radio [disabled]="validateExternalData.disabled" value="false">False</nb-radio>
+                    </nb-radio-group>
+                </div>
+                <div class="field" id="default-response">
+                    <span class="text-basic caption-2">Default Response</span>
+                    <nb-radio-group name="defaultResponse" formControlName="default_response" [status]="defaultResponse.invalid && submitted ? 'warning' : 'info'"> 
+                        <nb-radio [disabled]="defaultResponse.disabled" value="PASS">Pass</nb-radio>
+                        <nb-radio [disabled]="defaultResponse.disabled" value="FAIL">Fail</nb-radio>
+                    </nb-radio-group>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="field" id="customer-issue">
+                    <span class="text-basic caption-2">Customer Issue</span>
+                    <input nbInput fullWidth type="text" fieldSize="tiny" formControlName="customer_issue" placeholder="System" [status]="customerIssue.invalid && submitted ? 'warning' : 'basic'">
+                </div>
+            </div>
+
+            <div class="row sdk-row headers">
+                <span class="text-basic caption-2">Subscription Data Keys</span>
+                <span class="text-basic caption-2">Values</span>
+                <span class="text-basic caption-2">External Data Key</span>
+                <span class="text-basic caption-2">Criteria</span>
+                <div class="add-sdk-group">
+                    <nb-icon icon="plus-square-outline" status="info" (click)="onAddSdkGroup()"></nb-icon>
+                </div>
+            </div>
+
+            <div class="row sdk-row" *ngFor="let group of sdkGroup.controls; let i=index">
+                <input nbInput fullWidth type="text" fieldSize="tiny" [formControl]="getSdk(i)" placeholder="Subscription Data Key" [status]="getSdk(i).invalid && submitted ? 'warning' : 'basic'">
+
+                <nb-tag-list (tagRemove)="onRemoveValue($event, group)" size="tiny" [attr.disabled]="getValues(group).disabled">
+                    <nb-tag *ngFor="let tag of getValues(group).value; let i=index" [text]="tag" size="tiny" [removable]="!getValues(group).disabled"></nb-tag>
+                    <input nbTagInput [disabled]="getValues(group).disabled" fieldSize="tiny" fullWidth type="text" (tagAdd)="onAddValue($event, group)" [status]="getValues(group).invalid && submitted ? 'warning' : 'basic'"
+                        placeholder="Enter to Add" [disabled]="getValues(group).disabled">
+                </nb-tag-list>
+
+                <input nbInput fullWidth type="text" fieldSize="tiny" [formControl]="getEdk(group)" placeholder="External Data Key" [status]="getEdk(group).invalid && submitted ? 'warning' : 'basic'">
+
+                <div class="criteria-field">
+                    <input nbInput fullWidth type="text" fieldSize="tiny" [formControl]="getCriteria(group).get('key')" placeholder="Key">
+                    <input nbInput fullWidth type="text" fieldSize="tiny" [formControl]="getCriteria(group).get('value')" placeholder="Value">
+                </div>
+
+                <div class="delete-sdk-group">
+                    <nb-icon icon="close-square-outline" status="danger" (click)="onRemoveSdkGroup(i)"></nb-icon>
+                </div>
+            </div>
+        </form>
+    </nb-card-body>
+</nb-card>
