@@ -1,27 +1,50 @@
-# Chat
+[![Current Version](https://img.shields.io/badge/version-1.0.0-ea0a8e.svg?label=Version&style=flat-square)](https://github.com/jonyu96/admin-ui) [![Live Demo](https://img.shields.io/badge/demo-online-green.svg?label=Demo&style=flat-square)](https://zed-admin-ui.herokuapp.com)
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.4.
+# Zed Admin UI 🤖
 
-## Development server
+🤖 A minimal admin dashboard / tool developed using Angular for managing users and data.<br>
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+<img src="./images/screenshot.png?raw=true" height="300"> <br>
 
-## Code scaffolding
+> Check out the [DEMO](https://zed-admin-ui.herokuapp.com/)
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+<br>
 
-## Build
+## Features
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
+- **Registration Component** for registering and storing users internally.
+- **Login Component** component for implementation with external SSO API. 
+- View registered users and manage their app permissions on **Home Page**.
+- CRUD operations with custom form validation (can be implemented with any API backend service)
+- Search and alpha-sort filter (for rules data)
+- View JSON data with **ngx-json-viewer**
+- Configure and view API data sources (think of [Swagger UI](https://petstore.swagger.io)) through form or Swagger file upload
+- Custom component (modified **ngx-json-viewer**) for building out JSON objects
+- Nebular UI framework used for design
 
-## Running unit tests
+## Running Locally
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+1. Clone repo
+```
+git clone https://github.com/jonyu96/admin-ui.git
 
-## Running end-to-end tests
+cd admin-ui
+```
+2. Install dependencies using NPM
+```
+npm i 
+```
+3. Run `ng serve` for dev server and navigate to `http://localhost:4200/`
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+## Technologies Used
 
-## Further help
+[![Angular](https://img.shields.io/badge/angular-%23DD0031.svg?style=for-the-badge&logo=angular&logoColor=white)](https://angular.io)
+[![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)](https://nodejs.org/en/)
+[![NebularUI](https://img.shields.io/badge/nebular-3366ff.svg?style=for-the-badge&logo=nebular&logoColor=white)](https://akveo.github.io/nebular/)
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+## License
+
+>You can check out the full license [here](https://github.com/jonyu96/admin-ui/blob/master/LICENSE.MD)
+
+This project is licensed under the terms of the **MIT** license.
